@@ -1,4 +1,6 @@
 <template>
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lora" />
+  <Header></Header>
   <div id="nav">
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link>
@@ -6,25 +8,38 @@
   <router-view/>
 </template>
 
+<script>
+import Header from './components/Header.vue'
+
+export default {
+  components: {
+    Header
+  }
+}
+</script>
+
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+* {
+  font-family: 'Lora';
+  outline: none;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
-#nav {
-  padding: 30px;
+html,
+body {
+  width: 100%;
+  height: 100%;
 }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+a {
+  color: #FFFFFF;
 }
 
-#nav a.router-link-exact-active {
-  color: #42b983;
+body {
+  background-image: #FFFFFF;
+  color: #1B1B1F;
 }
+
 </style>
