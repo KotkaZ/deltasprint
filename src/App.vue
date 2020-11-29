@@ -1,10 +1,6 @@
 <template>
   <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lora" />
   <Header></Header>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div>
   <router-view/>
 </template>
 
@@ -33,9 +29,6 @@ body {
   height: 100%;
 }
 
-a {
-  color: #FFFFFF;
-}
 
 body {
   background-image: #FFFFFF;
