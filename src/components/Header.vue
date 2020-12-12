@@ -14,12 +14,6 @@
             </li>
 
             <li class="items">
-                <router-link to="/test">
-                    <p>Test</p>
-                </router-link>
-            </li>
-
-            <li class="items">
                 <router-link to="/competition">
                     <p>Competition</p>
                 </router-link>
