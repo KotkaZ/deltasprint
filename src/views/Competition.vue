@@ -1,12 +1,12 @@
 <template>
   <div>
     <LoginWindow v-if="!getStudent" class="login"></LoginWindow>
-    <div v-else>
+    <div class="c" v-else>
       <ProgressBar></ProgressBar>
       <ScoreTable></ScoreTable>
-      <ExerciseDesc></ExerciseDesc>
-      <ExcerciseStn></ExcerciseStn>
+      <ExerciseDesc :task="getTask"></ExerciseDesc>
       <UserInfo :student="getStudent"></UserInfo>
+      <ExcerciseStn></ExcerciseStn>
     </div>
 
   </div>
@@ -32,7 +32,7 @@ export default {
     LoginWindow
   },
   computed: {
-    ...mapGetters(['getStudent'])
+    ...mapGetters(['getStudent', 'getTask'])
   }
 
 }
@@ -43,6 +43,17 @@ export default {
   top: 50%;
   -ms-transform: translateY(50%);
   transform: translateY(50%);
+}
+
+div.c {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+@media(max-width:768px){
+  div.c{
+    flex-direction: column;
+  }
 }
 
 </style>

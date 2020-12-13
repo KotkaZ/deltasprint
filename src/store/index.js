@@ -1,5 +1,7 @@
 import { createStore } from 'vuex';
 import CurrentCompetition from '../models/CurrentCompetition.js';
+import CurrentTask from '../models/CurrentTask.js';
+
 
 import axios from 'axios';
 
@@ -7,7 +9,7 @@ export default createStore({
     state: {
         currentStudent: null,
         currentCompetition: null,
-        currentTask: null,
+        currentTask: new CurrentTask("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "https://flhs.fairlawnschools.org/ourpages/auto/2020/5/26/55995212/math%20image.jpg"),
         availableCompetitions: [new CurrentCompetition("Katsetamine")],
     },
     getters: {
