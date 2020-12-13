@@ -8,7 +8,9 @@
 import UserResult from '../components/UserResult.vue'
 export default {
   name: "Results",
-  components: [UserResult]
+  components: {
+    UserResult
+  }
 
 }
 </script>
