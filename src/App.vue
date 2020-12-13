@@ -31,7 +31,7 @@ body {
 
 
 body {
-  background-image: #FFFFFF;
+  background-image: url('assets/background.jpg');
   color: #1B1B1F;
 }
 
