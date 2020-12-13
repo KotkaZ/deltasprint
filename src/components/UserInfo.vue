@@ -38,7 +38,18 @@ export default {
 </script>
 
 <style scoped>
-    p {
-        color: black;
-    }
+p {
+    color: black;
+}
+
+div {
+    margin: 10px;
+    flex-basis: 30%;
+    max-width: 500px;
+    padding: 10px 20px;
+    background: #f4f7f8;
+    padding: 20px;
+    background: #f4f7f8;
+    border-radius: 8px;
+}
 </style>

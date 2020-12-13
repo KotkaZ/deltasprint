@@ -1,15 +1,13 @@
 <template>
     <form @submit.prevent="checkForm">
-        <fieldset>
-            <legend><span class="number">!</span> Võistleja info</legend>
-            <input type="text" v-model="name" placeholder="Ees- ja perekonnanimi">
-            <input type="text" v-model="code" placeholder="Matrikli number">
-            <input type="email" v-model="email" placeholder="Email">
-            <label for="job">Võistlus:</label>
-            <select id="job" v-model="competition">
-                <option v-for="competition in getAllCompetitions" :key="competition" value="competition">{{ competition.name }}</option>
-            </select>      
-        </fieldset>
+        <legend><span class="number">!</span> Võistleja info</legend>
+        <input type="text" v-model="name" placeholder="Ees- ja perekonnanimi">
+        <input type="text" v-model="code" placeholder="Matrikli number">
+        <input type="email" v-model="email" placeholder="Email">
+        <label for="job">Võistlus:</label>
+        <select id="job" v-model="competition">
+            <option v-for="competition in getAllCompetitions" :key="competition" value="competition">{{ competition.name }}</option>
+        </select>      
 
         <p v-if="errors.length">
             <b>Palun paranda järgnevad vead:</b>
