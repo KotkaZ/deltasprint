@@ -1,5 +1,6 @@
 import { createStore } from 'vuex';
-import CurrentStudent from '../models/CurrentStudent.js';
+import CurrentCompetition from '../models/CurrentCompetition.js';
+
 import axios from 'axios';
 
 export default createStore({
@@ -7,22 +8,26 @@ export default createStore({
         currentStudent: null,
         currentCompetition: null,
         currentTask: null,
-        availableCompetitions: [],
+        availableCompetitions: [new CurrentCompetition("Katsetamine")],
     },
     getters: {
         getStudent: state => state.currentStudent,
         getCompetition: state => state.currentCompetition,
         getTask: state => state.currentTask,
-        getAllCompetitions: state => state.competitions,
+        getAllCompetitions: state => state.availableCompetitions,
 
     },
     mutations: {
-        setStudent: (state, studentName, studentCode) => (state.currentStudent = new CurrentStudent(studentName, studentCode)),
-        setCompetitions: (state, competitions) => (state.availableCompetitions = competitions)
+        setStudent: (state, currentStudent) => state.currentStudent = currentStudent,
+        setCompetitions: (state, competitions) => state.availableCompetitions = competitions,
+        setCompetition: (state, competition) => state.currentCompetition = competition
     },
     actions: {
-        signinStudent(name, code, { commit }) {
-            commit('setStudent', name, code)
+        signinStudent({ commit }, currentStudent) {
+            commit('setStudent', currentStudent)
+        },
+        setCompetition({ commit }, competition) {
+            commit('setCompetition', competition)
         },
         async fetchCompetitons({ commit }) {
             const response = await axios.get('https://jsonplaceholder.typicode.com/posts')
