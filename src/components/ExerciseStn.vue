@@ -1,8 +1,9 @@
 <template>
-  <form @submit.prevent="checkForm">
+  <form @submit.prevent="submitResult">
     <legend><span class="number">!</span> Lahendus</legend>
-    <textarea name="field3" placeholder="Lahenduskäik"></textarea>
-    <input type="text" v-model="code" placeholder="Vastus">
+    <textarea v-model="solution" placeholder="Lahenduskäik"></textarea>
+    <input type="text" v-model="answer" placeholder="Vastus">
+	<input type="file" id="file" ref="file" v-on:change="handleFileUpload()">
 
     <p v-if="errors.length">
         <b>Palun paranda järgnevad vead:</b>
@@ -11,29 +12,41 @@
         </ul>
     </p>
 
-    <input type="submit" value="Esita lahendus" />
+    <input type="submit" value="Esita lahendus"/>
   </form>
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 export default {
     name: "ExerciseSolution",
     data: function(){
       return {
-          errors: []
+		errors: [],
+		solution: null,
+		answer: null,
+		file: ''
       }
     },
     methods: {
-      checkForm: function () {
-            if (this.name && this.age) return true;
-            
-            this.errors = [];
+		...mapActions(['submitResult']),
+		submitResult: function () {		
+			this.errors = [];
 
-            if (!this.name) this.errors.push('Nimi on puudu!');
-            if (!this.code) this.errors.push('Matrikli number on puudu!');
-            if (!this.email) this.errors.push('Email on puudu!');
-            if (!this.competition) this.errors.push('Võistlus pole valitud!');
-        }
+			if (!this.solution) this.errors.push('Lahenduskäik on puudu!');
+			if (!this.answer) this.errors.push('Vastus on puudu!');
+
+			if(!this.errors.length){
+				let formData = new FormData();
+				formData.append('solution', this.solution);
+				formData.append('answer', this.answer);
+				formData.append('file', this.file);
+				this.submitResult(formData);
+			}
+		},
+		handleFileUpload: function(){
+			this.file = this.$refs.file.files[0];
+		}
     }
 }
 </script>
