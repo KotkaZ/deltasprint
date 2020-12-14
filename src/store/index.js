@@ -34,6 +34,19 @@ export default createStore({
         async fetchCompetitons({ commit }) {
             const response = await axios.get('https://jsonplaceholder.typicode.com/posts')
             commit('setCompetitions', response)
+        },
+        submitResult({ commit }, formData) {
+            axios.post('/tba',
+                formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                }).then(function() {
+                commit()
+                console.log("sucess")
+            }).catch(function() {
+                console.log("Strange failure!")
+            })
         }
     },
     modules: {}
