@@ -1,7 +1,7 @@
 <template>
   <div class="home">
 
-    <div class="Introduction">'
+    <div class="introduction">'
       <h1>DeltaSprint</h1>
 
       <p><strong>Kas tahad sprintida, kuid ei tegele spordiga?</strong></p>
@@ -15,11 +15,16 @@
       <p>Kui oled huvitatud, siis ole sellel lehel 23. jaanuaril.</p>
     </div>
     
-    <div class="logos">
-      <img src="../assets/arvutiteaduse_instituut_est_valge.png" alt="ATI logo">
-      <img src="../assets/matemaatika_ja_statistika_instituut_est_valge.png" alt="MSI logo">
+    <div class="center">
       <strong>Üritust korraldab:</strong>
       <img src="../assets/mits_logo_tekstiga_valge.svg" alt="MITS logo">
+      
+      <strong>Üritust toetavad:</strong>
+
+      <div class="toetajad">
+        <img src="../assets/matemaatika_ja_statistika_instituut_est_valge.png" alt="MSI logo">
+        <img src="../assets/arvutiteaduse_instituut_est_valge.png" alt="ATI logo">
+      </div>
     </div>
     
 
@@ -40,11 +45,31 @@ export default {
 p, strong, h1{
   color:white;
 }
-img {
-  width: 30%;
+
+strong{
+  font-size: larger;
+  text-transform: uppercase;
 }
-div.logos{
+
+img {
+  width: 15%;
+}
+div.introduction{
+  text-align: center;
+}
+div.center{
+  padding-top: 50px;
   display: flex;
-  align-items: flex-end;
+  flex-flow: column;
+  align-items: center;
+  margin-top: auto;
+}
+
+div.toetajad{
+  text-align: center;
+}
+
+div.home{
+  height: 100%;
 }
 </style>

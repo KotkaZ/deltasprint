@@ -1,16 +1,22 @@
 <template>
   <div>
-    <p><strong>Kas tahad sprintida, kuid ei tegele spordiga?</strong></p>
+    <strong>Võistlusest</strong>
+    <p>
+      DELTASPRINT on võistlus, kus tuleb lahendada erinevaid matemaatika, loogika ja programmeerimisülesandeid.
+      Osad ülesanded on lahendatavad mitmel eriviisil, sellisel juhul on lahenduskäik vaba.
+      Auhinnafond on 600€, mis jaotatakse esikolmiku vahel. 
+    </p>
 
-    <p>Ole mureta! Osale DeltaSprint võistlusel, kus pead võitmiseks vaid mõistust kasutama.</p>
-
-    <p>Ülesanded on võimalik lahendada ilma uhkete programmeerimisteadmisteta, seega kui Püüton või Java su emakeel pole, siis hätta ei jää.</p>
-
-    <p>Võistlusele saavad osaleda kõik bakalaureuse tudengid ning osalejate piirarvu ei ole!</p>
-
-    <p>Kui oled huvitatud, siis ole sellel lehel 23. jaanuaril!</p>
-
-    <p>Tere maailm!</p>
+    <strong>Nõuded:</strong>
+    <ul>
+      <li>Võistlusel osaleja peab olema Tartu Ülikooli bakalaureuse tudeng.</li>
+      <li>Veebikaamera olemasolu ja avatud veebipilt lahendamise ekraanil.</li>
+      <li>Ülessannete lahendamise vältel peab ekraanisalvestama vabalt valitud tarkvaraga, soovitatavalt OBSiga.</li>
+      <li>Paberile lahendatud ülesandeid tuleb näidata kaamerasse ja hiljem foto/skanneeriguga salvestama.</li>
+      <li>Kõik jäädvustused käivad koos ekraanisalvestustega ja neile kehtivad samad reeglid.</li>
+      <li>Ekraanisalvestus tuleb hoida alles 10 päeva peale võistluse.</li>
+      <li>Esikolmik peab stipendiumi kinnitamiseks esitama ekraanisalvestused.</li>
+    </ul>
 
   </div>
 </template>
@@ -28,13 +34,12 @@ div {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #B79A31;
+  background-color: #f4f7f8;
   padding: 10px;
   border-radius: 15px;
 }
 p {
   text-align: center;
-  color: #fff;
   padding: 10px;
 }
 
