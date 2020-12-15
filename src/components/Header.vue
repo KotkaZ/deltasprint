@@ -9,19 +9,19 @@
             </li>
             <li class="items">
                 <router-link to="/about">
-                    <p>About</p>
+                    <p>Juhised</p>
                 </router-link>
             </li>
 
             <li class="items">
                 <router-link to="/competition">
-                    <p>Competition</p>
+                    <p>Võistlema</p>
                 </router-link>
             </li>
 
             <li class="items">
                 <router-link to="/results">
-                    <p>Results</p>
+                    <p>Tulemused</p>
                 </router-link>
             </li>
             <li class="btn" @click="toggleMenu">
