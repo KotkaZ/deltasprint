@@ -6,7 +6,7 @@
         <input type="email" v-model="email" placeholder="Email">
         <label for="job">Võistlus:</label>
         <select id="job" v-model="competition">
-            <option v-for="competition in getAllCompetitions" :key="competition" value="competition">{{ competition.name }}</option>
+            <option v-for="competition in competitions" :key="competition.id" value="competition">{{ competition.name }}</option>
         </select>      
 
         <p v-if="errors.length">
@@ -21,14 +21,11 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions } from 'vuex';
 import CurrentStudent from '../models/CurrentStudent.js';
 
 export default {
     name: "LoginWindow",
-    computed: {
-        ...mapGetters(['getAllCompetitions'])
-    },
     data: function() {
         return {
             errors: [],
@@ -54,7 +51,8 @@ export default {
                 this.signinStudent(new CurrentStudent(this.name, this.code, this.email));
             }
         }
-    }
+	},
+	props: ['competitions']
 
 }
 </script>

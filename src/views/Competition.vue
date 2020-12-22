@@ -1,8 +1,8 @@
 <template>
   <div>
-    <LoginWindow v-if="!getStudent" class="login"></LoginWindow>
+    <LoginWindow v-if="!getStudent" :competitions="getCompetitions" class="login"></LoginWindow>
     <div class="c" v-else>
-      <ProgressBar></ProgressBar>
+      <ProgressBar :numberOfTasks="10" :myProgress="5" :bestProgress="6"></ProgressBar>
       <ScoreTable></ScoreTable>
       <ExerciseDesc :task="getTask"></ExerciseDesc>
       <UserInfo :student="getStudent"></UserInfo>
@@ -19,7 +19,7 @@ import ExerciseDesc from '../components/ExerciseDesc.vue'
 import ExcerciseStn from '../components/ExerciseStn.vue'
 import UserInfo from '../components/UserInfo.vue'
 import LoginWindow from '../components/LoginWindow.vue'
-import { mapGetters } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name:"Competition",
@@ -32,7 +32,13 @@ export default {
     LoginWindow
   },
   computed: {
-    ...mapGetters(['getStudent', 'getTask'])
+    ...mapGetters(['getStudent', 'getTask', 'getCompetitions'])
+  },
+  methods: {
+    ...mapActions(['fetchCompetitions'])
+  },
+  mounted() {
+    this.fetchCompetitions();
   }
 
 }
