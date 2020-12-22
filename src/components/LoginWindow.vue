@@ -1,12 +1,17 @@
 <template>
     <form @submit.prevent="checkForm">
         <legend><span class="number">!</span> Võistleja info</legend>
-        <input type="text" v-model="name" placeholder="Ees- ja perekonnanimi">
+        <input type="text" v-model="firstname" placeholder="Eesnimi">
+		<input type="text" v-model="lastname" placeholder="Perekonnanimi">
         <input type="text" v-model="code" placeholder="Matrikli number">
         <input type="email" v-model="email" placeholder="Email">
-        <label for="job">Võistlus:</label>
-        <select id="job" v-model="competition">
-            <option v-for="competition in competitions" :key="competition.id" value="competition">{{ competition.name }}</option>
+		<label for="studyfield">Õpin:</label>
+        <select id="studyfield" v-model="studies">
+            <option v-for="studyfield in studyfields" :key="studyfield" :value="studyfield">{{ studyfield }}</option>
+        </select> 
+        <label for="competition">Võistlus:</label>
+        <select id="competition" v-model="competition">
+            <option v-for="competition in competitions" :key="competition.id" :value="competition">{{ competition.name }}</option>
         </select>      
 
         <p v-if="errors.length">
@@ -29,10 +34,14 @@ export default {
     data: function() {
         return {
             errors: [],
-            name: null,
-            code: null,
+			firstname: null,
+			lastname: null,
+			code: null,
+			studies: null,
             email: null,
-            competition: null
+			competition: null,
+			studyfields: ["Infromaatika", "Matemaatika", "Arvutitehnika", "Matemaatiline statistika"]
+
         }
     },
     methods: {
@@ -42,13 +51,14 @@ export default {
             
             this.errors = [];
 
-            if (!this.name) this.errors.push('Nimi on puudu!');
+			if (!this.firstname) this.errors.push('Eesnimi on puudu!');
+			if (!this.lastname) this.errors.push('Perekonnanimi on puudu!');
             if (!this.code) this.errors.push('Matrikli number on puudu!');
             if (!this.email) this.errors.push('Email on puudu!');
             if (!this.competition) this.errors.push('Võistlus pole valitud!');
 
             if(!this.errors.length){
-                this.signinStudent(new CurrentStudent(this.name, this.code, this.email));
+                this.signinStudent(new CurrentStudent(this.firstname, this.lastname, this.code, this.studies, this.email, this.competition.id));
             }
         }
 	},

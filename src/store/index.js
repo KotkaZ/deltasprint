@@ -3,6 +3,7 @@ import CurrentTask from '../models/CurrentTask.js';
 
 
 import axios from 'axios';
+const apiURL = "http://localhost:3000";
 
 export default createStore({
     state: {
@@ -24,14 +25,15 @@ export default createStore({
         setCompetition: (state, competition) => state.currentCompetition = competition
     },
     actions: {
-        signinStudent({ commit }, currentStudent) {
-            commit('setStudent', currentStudent)
+        async signinStudent({ commit }, currentStudent) {
+            const response = await axios.post(`${apiURL}/participants`, currentStudent);
+            commit('setStudent', response.data);
         },
         setCompetition({ commit }, competition) {
             commit('setCompetition', competition)
         },
         async fetchCompetitions({ commit }) {
-            const response = await axios.get('http://localhost:3000/competitions');
+            const response = await axios.get(`${apiURL}/competitions`);
             commit('setCompetitions', response.data);
         },
         submitResult({ commit }, formData) {
