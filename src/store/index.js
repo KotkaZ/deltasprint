@@ -22,7 +22,8 @@ export default createStore({
     mutations: {
         setStudent: (state, currentStudent) => state.currentStudent = currentStudent,
         setCompetitions: (state, competitions) => state.availableCompetitions = competitions,
-        setCompetition: (state, competition) => state.currentCompetition = competition
+        setCompetition: (state, competition) => state.currentCompetition = competition,
+        setTask: (state, task) => state.currentTask = task
     },
     actions: {
         async signinStudent({ commit }, currentStudent) {
@@ -36,18 +37,26 @@ export default createStore({
             const response = await axios.get(`${apiURL}/competitions`);
             commit('setCompetitions', response.data);
         },
-        submitResult({ commit }, formData) {
-            axios.post('/tba',
+        async fetchTask({ commit }) {
+            const response = await axios.get(`${apiURL}/answers`, {
+                headers: {
+                    'participant_id': this.getStudent.id,
+                    'competition_id': this.competition.id
+                }
+            });
+            commit('setTask', response.data)
+        },
+        async submitResult({ commit }, formData) {
+            await axios.post(`${apiURL}/answers`,
                 formData, {
                     headers: {
-                        'Content-Type': 'multipart/form-data'
+                        'Content-Type': 'multipart/form-data',
+                        'participant_id': this.getStudent.id,
+                        'competition_id': this.competition.id
                     }
                 }).then(function() {
                 commit()
-                console.log("sucess")
-            }).catch(function() {
-                console.log("Strange failure!")
-            })
+            }).catch(function() {})
         }
     },
     modules: {}
