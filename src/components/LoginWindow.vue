@@ -50,12 +50,12 @@ export default {
         checkForm: function () {
 			try{
 				const schema = joi.object().keys({
-					firstname: joi.string().min(3).max(45).required(),
-					lastname: joi.string().min(3).max(45).required(),
-					studentcode: joi.string().alphanum().length(6).required(),
-					email: joi.string().email({ tlds: {allow: false} }).required(),
-					studyfield: joi.string().required(),
-					competition: joi.any().required()
+					firstname: joi.string().min(3).max(45).required().label('Eesnimi'),
+					lastname: joi.string().min(3).max(45).required().label('Perekonnanimi'),
+					studentcode: joi.string().alphanum().length(6).required().label('Matrikli number'),
+					email: joi.string().email({ tlds: {allow: false} }).required().label('Email'),
+					studyfield: joi.string().required().label('Eriala'),
+					competition: joi.any().required().label('Võistlus')
 				});
 
 				const dataToValidate = {
