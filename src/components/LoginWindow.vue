@@ -3,15 +3,15 @@
         <legend><span class="number">!</span> Võistleja info</legend>
         <input type="text" v-model="firstname" placeholder="Eesnimi">
 		<input type="text" v-model="lastname" placeholder="Perekonnanimi">
-        <input type="text" v-model="code" placeholder="Matrikli number">
+        <input type="text" v-model="studentcode" placeholder="Matrikli number">
         <input type="email" v-model="email" placeholder="Email">
 		<label for="studyfield">Õpin:</label>
-        <select id="studyfield" v-model="studies">
-            <option v-for="studyfield in studyfields" :key="studyfield" :value="studyfield">{{ studyfield }}</option>
+        <select id="studyfield" v-model="studyfield">
+            <option v-for="studies in studyfields" :key="studies" :value="studies">{{ studies }}</option>
         </select> 
         <label for="competition">Võistlus:</label>
         <select id="competition" v-model="competition">
-            <option v-for="competition in competitions" :key="competition.id" :value="competition">{{ competition.name }}</option>
+            <option v-for="competition in competitions" :key="competition.id" :value="competition.id">{{ competition.name }}</option>
         </select>      
 
         <p v-if="errors.length">
@@ -28,18 +28,19 @@
 <script>
 import { mapActions } from 'vuex';
 import CurrentStudent from '../models/CurrentStudent.js';
+import joi from 'joi';
 
 export default {
     name: "LoginWindow",
     data: function() {
         return {
             errors: [],
-			firstname: null,
-			lastname: null,
-			code: null,
-			studies: null,
-            email: null,
-			competition: null,
+			firstname: undefined,
+			lastname: undefined,
+			studentcode: undefined,
+			studyfield: undefined,
+            email: undefined,
+			competition: undefined,
 			studyfields: ["Infromaatika", "Matemaatika", "Arvutitehnika", "Matemaatiline statistika"]
 
         }
@@ -47,19 +48,36 @@ export default {
     methods: {
         ...mapActions(['signinStudent']),
         checkForm: function () {
-            if (this.name && this.age) return true;
-            
-            this.errors = [];
+			try{
+				const schema = joi.object().keys({
+					firstname: joi.string().min(3).max(45).required(),
+					lastname: joi.string().min(3).max(45).required(),
+					studentcode: joi.string().alphanum().length(6).required(),
+					email: joi.string().email({ tlds: {allow: false} }).required(),
+					studyfield: joi.string().required(),
+					competition: joi.any().required()
+				});
 
-			if (!this.firstname) this.errors.push('Eesnimi on puudu!');
-			if (!this.lastname) this.errors.push('Perekonnanimi on puudu!');
-            if (!this.code) this.errors.push('Matrikli number on puudu!');
-            if (!this.email) this.errors.push('Email on puudu!');
-            if (!this.competition) this.errors.push('Võistlus pole valitud!');
+				const dataToValidate = {
+					firstname: this.firstname,
+					lastname: this.lastname,
+					studentcode: this.studentcode,
+					email: this.email,
+					studyfield: this.studyfield,
+					competition: this.competition
+				}
 
-            if(!this.errors.length){
-                this.signinStudent(new CurrentStudent(this.firstname, this.lastname, this.code, this.studies, this.email, this.competition.id));
-            }
+				const result = schema.validate(dataToValidate);
+				
+				if(result.error) throw result.error.details[0].message;
+
+				this.signinStudent(new CurrentStudent(this.firstname, this.lastname, this.code, this.studies, this.email, this.competition.id));
+			}
+			catch (e){
+				//TODO: Translate error messages to Estonian.
+				this.errors = [];
+				this.errors.push(e);
+			}
         }
 	},
 	props: ['competitions']
