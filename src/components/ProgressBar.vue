@@ -9,7 +9,6 @@ export default {
     name: "ProgressBar",
     props: ['numberOfTasks','myProgress','bestProgress'],
     created: function () {
-      console.log(this.bestProgress)
     }
 }
 </script>
