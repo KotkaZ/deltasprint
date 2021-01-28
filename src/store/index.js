@@ -1,20 +1,18 @@
 import { createStore } from 'vuex';
-import CurrentTask from '../models/CurrentTask.js';
-
 
 import axios from 'axios';
 const apiURL = "http://localhost:3000";
 
 export default createStore({
     state: {
-        currentStudent: null,
+        currentParticipant: null,
         currentCompetition: null,
-        currentTask: new CurrentTask("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "https://flhs.fairlawnschools.org/ourpages/auto/2020/5/26/55995212/math%20image.jpg"),
+        currentTask: null,
         availableCompetitions: null,
         accessToken: null
     },
     getters: {
-        getStudent: state => state.currentStudent,
+        getParticipant: state => state.currentParticipant,
         getCompetition: state => state.currentCompetition,
         getTask: state => state.currentTask,
         getCompetitions: state => state.availableCompetitions,
@@ -22,15 +20,16 @@ export default createStore({
 
     },
     mutations: {
-        setStudent: (state, currentStudent) => state.currentStudent = currentStudent,
+        setParticipant: (state, currentParticipant) => state.currentParticipant = currentParticipant,
         setCompetitions: (state, competitions) => state.availableCompetitions = competitions,
         setCompetition: (state, competition) => state.currentCompetition = competition,
         setTask: (state, task) => state.currentTask = task,
         setAccessToken: (state, accessToken) => state.accessToken = accessToken
     },
     actions: {
-        async signinStudent({ commit }, currentStudent) {
-            const response = await axios.post(`${apiURL}/participants`, currentStudent);
+        async signinParticipant({ commit }, currentParticipant) {
+            const response = await axios.post(`${apiURL}/participants`, currentParticipant);
+            localStorage.setItem('accessToken', response.data);
             commit('setStudent', response.data);
         },
         setCompetition({ commit }, competition) {
