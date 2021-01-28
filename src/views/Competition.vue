@@ -1,11 +1,11 @@
 <template>
   <div>
-    <LoginWindow v-if="!getStudent" :competitions="getCompetitions" class="login"></LoginWindow>
+    <LoginWindow v-if="!getAccessToken" :competitions="getCompetitions" class="login"></LoginWindow>
     <div class="c" v-else>
       <ProgressBar :numberOfTasks="10" :myProgress="5" :bestProgress="6"></ProgressBar>
       <ScoreTable></ScoreTable>
       <ExerciseDesc :task="getTask"></ExerciseDesc>
-      <UserInfo :student="getStudent"></UserInfo>
+      <UserInfo :participant="getParticipant"></UserInfo>
       <ExcerciseStn></ExcerciseStn>
     </div>
 
@@ -32,13 +32,14 @@ export default {
     LoginWindow
   },
   computed: {
-    ...mapGetters(['getStudent', 'getTask', 'getCompetitions'])
+    ...mapGetters(['getAccessToken', 'getTask', 'getCompetitions', 'getParticipant'])
   },
   methods: {
-    ...mapActions(['fetchCompetitions'])
+    ...mapActions(['fetchCompetitions', 'fetchTask'])
   },
-  mounted() {
-    this.fetchCompetitions();
+  created() {
+    if(!this.getAccessToken) this.fetchCompetitions();
+    else this.fetchTask();
   }
 
 }

@@ -21,36 +21,31 @@ export default createStore({
     mutations: {
         setParticipant: (state, currentParticipant) => state.currentParticipant = currentParticipant,
         setCompetitions: (state, competitions) => state.availableCompetitions = competitions,
-        setCompetition: (state, competition) => state.currentCompetition = competition,
         setTask: (state, task) => state.currentTask = task,
-        setAccessToken: (accessToken) => localStorage.setItem('accessToken', accessToken)
     },
     actions: {
-        async signinParticipant({ commit }, currentParticipant) {
-            const response = await axios.post(`${apiURL}/participants`, currentParticipant);
-            commit('setAccessToken', response.data);
-        },
-        setCompetition({ commit }, competition) {
-            commit('setCompetition', competition)
+        async signinParticipant({ commit, dispatch }, participant) {
+            const response = await axios.post(`${apiURL}/participants`, participant);
+            localStorage.setItem('accessToken', response.data.accessToken);
+            dispatch('fetchTask');
+            commit('setParticipant', participant)
         },
         async fetchCompetitions({ commit }) {
             const response = await axios.get(`${apiURL}/competitions`);
             commit('setCompetitions', response.data);
         },
-        async fetchTask({ commit }) {
-            const response = await axios.get(`${apiURL}/answers`, {
-                headers: {
-                    'accessToken': this.getAccessToken
-                }
+        async fetchTask({ commit, getters }) {
+            const response = await axios.get(`${apiURL}/questions`, {
+                headers: { 'accessToken': getters.getAccessToken }
             });
-            commit('setTask', response.data)
+            commit('setTask', response.data[0])
         },
-        async submitResult({ commit }, formData) {
+        async submitResult({ commit, getters }, formData) {
             await axios.post(`${apiURL}/answers`,
                 formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
-                        'accessToken': this.getAccessToken
+                        'accessToken': getters.getAccessToken
                     }
                 }).then(function() {
                 commit()
