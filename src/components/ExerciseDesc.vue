@@ -2,15 +2,8 @@
     <div class="flex-container">
         <div>
             <h2>Kirjeldus</h2>
-            <p>{{ task.describtion }}</p>
+            <p>{{ task.question }}</p>
         </div>
-        
-        
-        <div>
-            <h2>Ülesanne</h2>
-            <p>{{ task.task }}</p>
-        </div>
-        <img v-if="task.media" :src="task.media" alt="Task image">
     </div>
   
 </template>
