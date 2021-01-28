@@ -27,7 +27,6 @@
 
 <script>
 import { mapActions } from 'vuex';
-import CurrentStudent from '../models/CurrentStudent.js';
 import joi from 'joi';
 
 export default {
@@ -71,7 +70,7 @@ export default {
 				
 				if(result.error) throw result.error.details[0].message;
 
-				this.signinStudent(new CurrentStudent(this.firstname, this.lastname, this.code, this.studies, this.email, this.competition.id));
+				this.signinStudent(dataToValidate);
 			}
 			catch (e){
 				//TODO: Translate error messages to Estonian.

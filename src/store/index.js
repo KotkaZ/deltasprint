@@ -9,14 +9,13 @@ export default createStore({
         currentCompetition: null,
         currentTask: null,
         availableCompetitions: null,
-        accessToken: null
     },
     getters: {
         getParticipant: state => state.currentParticipant,
         getCompetition: state => state.currentCompetition,
         getTask: state => state.currentTask,
         getCompetitions: state => state.availableCompetitions,
-        getAccessToken: state => state.accessToken
+        getAccessToken: () => localStorage.getItem('accessToken')
 
     },
     mutations: {
@@ -24,13 +23,12 @@ export default createStore({
         setCompetitions: (state, competitions) => state.availableCompetitions = competitions,
         setCompetition: (state, competition) => state.currentCompetition = competition,
         setTask: (state, task) => state.currentTask = task,
-        setAccessToken: (state, accessToken) => state.accessToken = accessToken
+        setAccessToken: (accessToken) => localStorage.setItem('accessToken', accessToken)
     },
     actions: {
         async signinParticipant({ commit }, currentParticipant) {
             const response = await axios.post(`${apiURL}/participants`, currentParticipant);
-            localStorage.setItem('accessToken', response.data);
-            commit('setStudent', response.data);
+            commit('setAccessToken', response.data);
         },
         setCompetition({ commit }, competition) {
             commit('setCompetition', competition)
@@ -42,8 +40,7 @@ export default createStore({
         async fetchTask({ commit }) {
             const response = await axios.get(`${apiURL}/answers`, {
                 headers: {
-                    'participant_id': this.getStudent.id,
-                    'competition_id': this.competition.id
+                    'accessToken': this.getAccessToken
                 }
             });
             commit('setTask', response.data)
@@ -53,8 +50,7 @@ export default createStore({
                 formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
-                        'participant_id': this.getStudent.id,
-                        'competition_id': this.competition.id
+                        'accessToken': this.getAccessToken
                     }
                 }).then(function() {
                 commit()
