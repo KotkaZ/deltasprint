@@ -45,7 +45,7 @@ export default {
         }
     },
     methods: {
-        ...mapActions(['signinStudent']),
+        ...mapActions(['signinParticipant']),
         checkForm: function () {
 			try{
 				const schema = joi.object().keys({
@@ -57,7 +57,7 @@ export default {
 					competition: joi.any().required().label('Võistlus')
 				});
 
-				const dataToValidate = {
+				const participant = {
 					firstname: this.firstname,
 					lastname: this.lastname,
 					studentcode: this.studentcode,
@@ -66,11 +66,11 @@ export default {
 					competition: this.competition
 				}
 
-				const result = schema.validate(dataToValidate);
+				const result = schema.validate(participant);
 				
 				if(result.error) throw result.error.details[0].message;
 
-				this.signinStudent(dataToValidate);
+				this.signinParticipant(participant);
 			}
 			catch (e){
 				//TODO: Translate error messages to Estonian.

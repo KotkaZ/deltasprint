@@ -1,8 +1,8 @@
 <template>
     <div>
-        <p><strong>Nimi:</strong> {{ student.name }}</p>
-        <p><strong>Matrikli nr:</strong> {{ student.code }}</p>
-        <p><strong>Email:</strong> {{ student.email }}</p>
+        <p><strong>Nimi:</strong> {{ participant.firstname + " " + participant.lastname }}</p>
+        <p><strong>Matrikli nr:</strong> {{ participant.studentcode }}</p>
+        <p><strong>Email:</strong> {{ participant.email }}</p>
         <p><strong>Ekraani mõõtmed:</strong> {{ screenSize }}</p>
         <video ref="camera" :width="450" :height="357.5" autoplay></video>
     </div>
@@ -15,7 +15,7 @@ export default {
     components: {
         
     },
-    props: ["student"],
+    props: ["participant"],
     methods: {
     },
     computed: {
