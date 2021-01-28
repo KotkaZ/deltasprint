@@ -40,6 +40,12 @@ export default createStore({
             });
             commit('setTask', response.data[0])
         },
+        async fetchParticipant({ commit, getters }) {
+            const response = await axios.get(`${apiURL}/participants`, {
+                headers: { 'accessToken': getters.getAccessToken }
+            });
+            commit('setParticipant', response.data[0])
+        },
         async submitResult({ commit, getters }, formData) {
             await axios.post(`${apiURL}/answers`,
                 formData, {

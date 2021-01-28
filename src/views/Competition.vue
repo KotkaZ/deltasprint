@@ -35,11 +35,14 @@ export default {
     ...mapGetters(['getAccessToken', 'getTask', 'getCompetitions', 'getParticipant'])
   },
   methods: {
-    ...mapActions(['fetchCompetitions', 'fetchTask'])
+    ...mapActions(['fetchCompetitions', 'fetchTask', 'fetchParticipant'])
   },
-  created() {
+  beforeMount() {
     if(!this.getAccessToken) this.fetchCompetitions();
-    else this.fetchTask();
+    else{
+      this.fetchParticipant();
+      this.fetchTask();
+    }
   }
 
 }
