@@ -65,11 +65,10 @@ export default createStore({
             }
 
         },
-        async submitResult(formData) {
+        async submitResult({ dispatch }, formData) {
             try {
-                await axios.post(`${apiURL}/answers`, formData, {
-                    headers: { 'Content-Type': 'multipart/form-data' }
-                });
+                await axios.post(`${apiURL}/answers`, formData);
+                dispatch('fetchQuestion');
 
             } catch (error) {
                 console.log(error);

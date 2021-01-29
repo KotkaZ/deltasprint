@@ -1,10 +1,10 @@
 <template>
   <div class="c">
-    <ProgressBar :numberOfTasks="10" :myProgress="5" :bestProgress="6"></ProgressBar>
+    <ProgressBar :numberOfTasks="10" :myProgress="getQuestion.number" :bestProgress="6"></ProgressBar>
     <ScoreTable></ScoreTable>
     <ExerciseDesc :task="getQuestion"></ExerciseDesc>
     <UserInfo :participant="getParticipant"></UserInfo>
-    <ExcerciseStn></ExcerciseStn>
+    <ExcerciseStn :question="getQuestion"></ExcerciseStn>
   </div>
 </template>
 

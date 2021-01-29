@@ -1,7 +1,7 @@
 <template>
-  <form @submit.prevent="submitResult">
+  <form @submit.prevent="submit">
     <legend><span class="number">!</span> Lahendus</legend>
-    <textarea v-model="solution" placeholder="Lahenduskäik"></textarea>
+    <textarea v-model="description" placeholder="Lahenduskäik"></textarea>
     <input type="text" v-model="answer" placeholder="Vastus">
 	<input type="file" id="file" ref="file" v-on:change="handleFileUpload()">
 
@@ -23,7 +23,7 @@ export default {
     data: function(){
       return {
 		errors: [],
-		solution: null,
+		description: null,
 		answer: null,
 		file: ''
       }
@@ -33,12 +33,13 @@ export default {
 		submit: function () {		
 			this.errors = [];
 
-			if (!this.solution) this.errors.push('Lahenduskäik on puudu!');
+			if (!this.description) this.errors.push('Lahenduskäik on puudu!');
 			if (!this.answer) this.errors.push('Vastus on puudu!');
 
 			if(!this.errors.length){
 				let formData = new FormData();
-				formData.append('solution', this.solution);
+				formData.append('question', this.question.id);
+				formData.append('description', this.description);
 				formData.append('answer', this.answer);
 				formData.append('file', this.file);
 				this.submitResult(formData);
@@ -47,7 +48,8 @@ export default {
 		handleFileUpload: function(){
 			this.file = this.$refs.file.files[0];
 		}
-    }
+	},
+	props: ['question']
 }
 </script>
 
