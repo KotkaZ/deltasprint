@@ -70,7 +70,11 @@ export default {
 				
 				if(result.error) throw result.error.details[0].message;
 
-				this.signinParticipant(participant);
+				this.signinParticipant(participant).then(() => {
+					this.$router.push('Competition');
+				})
+				.catch(error => console.log(error));
+			
 			}
 			catch (e){
 				//TODO: Translate error messages to Estonian.

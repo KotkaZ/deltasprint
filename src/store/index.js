@@ -5,17 +5,16 @@ const apiURL = "http://localhost:3000";
 
 export default createStore({
     state: {
-        accessToken: localStorage.getItem('token') || '',
-        availableCompetitions: null,
-        participant: null,
-        question: null,
+        accessToken: localStorage.getItem('accessToken') || '',
+        availableCompetitions: [],
+        participant: {},
+        question: {}
     },
     getters: {
         getAccessToken: state => state.accessToken,
         getCompetitions: state => state.availableCompetitions,
         getParticipant: state => state.participant,
         getQuestion: state => state.question,
-        getStatus: state => state.status
     },
     mutations: {
         setAccessToken: (state, accessToken) => state.accessToken = accessToken,
@@ -24,21 +23,18 @@ export default createStore({
         setQuestion: (state, question) => state.question = question,
     },
     actions: {
-        async signinParticipant({ commit }, participant) {
+        async signinParticipant({ commit, dispatch }, participant) {
             try {
                 const response = await axios.post(`${apiURL}/participants`, participant)
 
                 const accessToken = response.data.accessToken;
-                const participantInfo = response.data.participant;
-
                 localStorage.setItem('accessToken', accessToken);
-                axios.defaults.headers.common['accessToken'] = accessToken;
-
                 commit('setAccessToken', accessToken);
-                commit('setParticipant', participantInfo);
+
+                dispatch('setupHeaders');
+
             } catch (error) {
-                localStorage.removeItem('accessToken');
-                delete axios.defaults.headers.common['accessToken'];
+                dispatch('removeHeaders');
                 throw error;
             }
         },
@@ -51,10 +47,10 @@ export default createStore({
             }
 
         },
-        async fetchTask({ commit }) {
+        async fetchQuestion({ commit }) {
             try {
                 const response = await axios.get(`${apiURL}/questions`);
-                commit('setTask', response.data[0]);
+                commit('setQuestion', response.data[0]);
             } catch (error) {
                 console.log(error);
             }
@@ -78,6 +74,14 @@ export default createStore({
             } catch (error) {
                 console.log(error);
             }
+        },
+        setupHeaders({ getters }) {
+            axios.defaults.headers.common['accessToken'] = getters.getAccessToken;
+        },
+        removeHeaders({ commit }) {
+            commit('setAccessToken', '');
+            localStorage.removeItem('accessToken');
+            delete axios.defaults.headers.common['accessToken'];
         }
     },
     modules: {}
