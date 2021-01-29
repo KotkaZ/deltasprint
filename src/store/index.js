@@ -5,57 +5,79 @@ const apiURL = "http://localhost:3000";
 
 export default createStore({
     state: {
-        currentParticipant: null,
-        currentCompetition: null,
-        currentTask: null,
+        accessToken: localStorage.getItem('token') || '',
         availableCompetitions: null,
+        participant: null,
+        question: null,
     },
     getters: {
-        getParticipant: state => state.currentParticipant,
-        getCompetition: state => state.currentCompetition,
-        getTask: state => state.currentTask,
+        getAccessToken: state => state.accessToken,
         getCompetitions: state => state.availableCompetitions,
-        getAccessToken: () => localStorage.getItem('accessToken')
-
+        getParticipant: state => state.participant,
+        getQuestion: state => state.question,
+        getStatus: state => state.status
     },
     mutations: {
-        setParticipant: (state, currentParticipant) => state.currentParticipant = currentParticipant,
+        setAccessToken: (state, accessToken) => state.accessToken = accessToken,
         setCompetitions: (state, competitions) => state.availableCompetitions = competitions,
-        setTask: (state, task) => state.currentTask = task,
+        setParticipant: (state, participant) => state.participant = participant,
+        setQuestion: (state, question) => state.question = question,
     },
     actions: {
-        async signinParticipant({ commit, dispatch }, participant) {
-            const response = await axios.post(`${apiURL}/participants`, participant);
-            localStorage.setItem('accessToken', response.data.accessToken);
-            dispatch('fetchTask');
-            commit('setParticipant', participant)
+        async signinParticipant({ commit }, participant) {
+            try {
+                const response = await axios.post(`${apiURL}/participants`, participant)
+
+                const accessToken = response.data.accessToken;
+                const participantInfo = response.data.participant;
+
+                localStorage.setItem('accessToken', accessToken);
+                axios.defaults.headers.common['accessToken'] = accessToken;
+
+                commit('setAccessToken', accessToken);
+                commit('setParticipant', participantInfo);
+            } catch (error) {
+                localStorage.removeItem('accessToken');
+                delete axios.defaults.headers.common['accessToken'];
+                throw error;
+            }
         },
         async fetchCompetitions({ commit }) {
-            const response = await axios.get(`${apiURL}/competitions`);
-            commit('setCompetitions', response.data);
+            try {
+                const response = await axios.get(`${apiURL}/competitions`);
+                commit('setCompetitions', response.data);
+            } catch (error) {
+                console.log(error);
+            }
+
         },
-        async fetchTask({ commit, getters }) {
-            const response = await axios.get(`${apiURL}/questions`, {
-                headers: { 'accessToken': getters.getAccessToken }
-            });
-            commit('setTask', response.data[0])
+        async fetchTask({ commit }) {
+            try {
+                const response = await axios.get(`${apiURL}/questions`);
+                commit('setTask', response.data[0]);
+            } catch (error) {
+                console.log(error);
+            }
+
         },
-        async fetchParticipant({ commit, getters }) {
-            const response = await axios.get(`${apiURL}/participants`, {
-                headers: { 'accessToken': getters.getAccessToken }
-            });
-            commit('setParticipant', response.data[0])
+        async fetchParticipant({ commit }) {
+            try {
+                const response = await axios.get(`${apiURL}/participants`);
+                commit('setParticipant', response.data[0]);
+            } catch (error) {
+                console.log(error);
+            }
+
         },
-        async submitResult({ commit, getters }, formData) {
-            await axios.post(`${apiURL}/answers`,
-                formData, {
-                    headers: {
-                        'Content-Type': 'multipart/form-data',
-                        'accessToken': getters.getAccessToken
-                    }
-                }).then(function() {
-                commit()
-            }).catch(function() {})
+        async submitResult(formData) {
+            try {
+                await axios.post(`${apiURL}/answers`, formData, {
+                    headers: { 'Content-Type': 'multipart/form-data', }
+                });
+
+            } catch (error) {
+                console.log(error);
+            }
         }
     },
     modules: {}
