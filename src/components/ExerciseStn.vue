@@ -30,7 +30,7 @@ export default {
     },
     methods: {
 		...mapActions(['submitResult']),
-		submitResult: function () {		
+		submit: function () {		
 			this.errors = [];
 
 			if (!this.solution) this.errors.push('Lahenduskäik on puudu!');
