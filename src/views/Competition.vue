@@ -1,6 +1,6 @@
 <template>
   <div class="c">
-    <ProgressBar :numberOfTasks="10" :myProgress="getQuestion.number" :bestProgress="6"></ProgressBar>
+    <ProgressBar :numberOfTasks="10" :myProgress="getQuestion.number" :bestProgress="getProgress"></ProgressBar>
     <ScoreTable></ScoreTable>
     <ExerciseDesc :task="getQuestion"></ExerciseDesc>
     <UserInfo :participant="getParticipant"></UserInfo>
@@ -26,14 +26,15 @@ export default {
     UserInfo
   },
   computed: {
-    ...mapGetters(['getAccessToken', 'getQuestion', 'getParticipant'])
+    ...mapGetters(['getAccessToken', 'getQuestion', 'getParticipant', 'getProgress'])
   },
   methods: {
-    ...mapActions(['fetchQuestion', 'fetchParticipant'])
+    ...mapActions(['fetchQuestion', 'fetchParticipant', 'fetchProgress'])
   },
   beforeMount() {
       if(Object.keys(this.getParticipant).length === 0) this.fetchParticipant();
       this.fetchQuestion();
+      this.fetchProgress();
   }
 
 }

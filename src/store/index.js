@@ -8,18 +8,21 @@ export default createStore({
         accessToken: localStorage.getItem('accessToken') || '',
         availableCompetitions: [],
         participant: {},
+        progress: 0,
         question: {}
     },
     getters: {
         getAccessToken: state => state.accessToken,
         getCompetitions: state => state.availableCompetitions,
         getParticipant: state => state.participant,
+        getProgress: state => state.progress,
         getQuestion: state => state.question,
     },
     mutations: {
         setAccessToken: (state, accessToken) => state.accessToken = accessToken,
         setCompetitions: (state, competitions) => state.availableCompetitions = competitions,
         setParticipant: (state, participant) => state.participant = participant,
+        setProgress: (state, progress) => state.progress = progress,
         setQuestion: (state, question) => state.question = question,
     },
     actions: {
@@ -51,6 +54,15 @@ export default createStore({
             try {
                 const response = await axios.get(`${apiURL}/questions`);
                 commit('setQuestion', response.data[0]);
+            } catch (error) {
+                console.log(error);
+            }
+
+        },
+        async fetchProgress({ commit }) {
+            try {
+                const response = await axios.get(`${apiURL}/answers`);
+                commit('setProgress', Number(response.data[0].value));
             } catch (error) {
                 console.log(error);
             }
