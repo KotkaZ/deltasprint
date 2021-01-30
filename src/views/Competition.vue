@@ -1,6 +1,6 @@
 <template>
   <div class="c">
-    <ProgressBar :numberOfTasks="10" :myProgress="getQuestion.number" :bestProgress="getProgress"></ProgressBar>
+    <ProgressBar :numberOfTasks="getQuestion.total" :myProgress="getQuestion.number" :bestProgress="getProgress"></ProgressBar>
     <ScoreTable></ScoreTable>
     <ExerciseDesc :task="getQuestion"></ExerciseDesc>
     <UserInfo :participant="getParticipant"></UserInfo>
