@@ -1,7 +1,5 @@
 import { createStore } from 'vuex';
-
-import axios from 'axios';
-const apiURL = "http://localhost:3000";
+import axios from '../plugins/axios';
 
 export default createStore({
     state: {
@@ -28,7 +26,7 @@ export default createStore({
     actions: {
         async signinParticipant({ commit, dispatch }, participant) {
             try {
-                const response = await axios.post(`${apiURL}/participants`, participant)
+                const response = await axios.post('participants', participant)
 
                 const accessToken = response.data.accessToken;
                 localStorage.setItem('accessToken', accessToken);
@@ -43,7 +41,7 @@ export default createStore({
         },
         async fetchCompetitions({ commit }) {
             try {
-                const response = await axios.get(`${apiURL}/competitions`);
+                const response = await axios.get('competitions');
                 commit('setCompetitions', response.data);
             } catch (error) {
                 console.log(error);
@@ -52,7 +50,7 @@ export default createStore({
         },
         async fetchQuestion({ commit }) {
             try {
-                const response = await axios.get(`${apiURL}/questions`);
+                const response = await axios.get('questions');
                 commit('setQuestion', response.data[0]);
             } catch (error) {
                 console.log(error);
@@ -61,7 +59,7 @@ export default createStore({
         },
         async fetchProgress({ commit }) {
             try {
-                const response = await axios.get(`${apiURL}/answers`);
+                const response = await axios.get('answers');
                 commit('setProgress', Number(response.data[0].value));
             } catch (error) {
                 console.log(error);
@@ -70,7 +68,7 @@ export default createStore({
         },
         async fetchParticipant({ commit }) {
             try {
-                const response = await axios.get(`${apiURL}/participants`);
+                const response = await axios.get('participants');
                 commit('setParticipant', response.data[0]);
             } catch (error) {
                 console.log(error);
@@ -79,7 +77,7 @@ export default createStore({
         },
         async submitResult({ dispatch }, formData) {
             try {
-                await axios.post(`${apiURL}/answers`, formData);
+                await axios.post('answers', formData);
                 dispatch('fetchQuestion');
 
             } catch (error) {
