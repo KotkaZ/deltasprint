@@ -4,6 +4,7 @@
     <textarea v-model="description" placeholder="Lahenduskäik"></textarea>
     <input type="text" v-model="answer" placeholder="Vastus">
 	<input type="file" id="file" ref="file" v-on:change="handleFileUpload()">
+	<progress max="100" :value="getUploadPercentage"></progress>
 
     <p v-if="errors.length">
         <b>Palun paranda järgnevad vead:</b>
@@ -17,7 +18,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters, mapMutations } from 'vuex';
 export default {
     name: "ExerciseSolution",
     data: function(){
@@ -27,9 +28,13 @@ export default {
 		answer: null,
 		file: ''
       }
-    },
+	},
+	computed: {
+		...mapGetters(['getUploadPercentage']),
+	},
     methods: {
-		...mapActions(['submitResult']),
+		...mapActions(['submitResult', 'fetchQuestion']),
+		...mapMutations(['setUploadPercentage']),
 		submit: function () {		
 			this.errors = [];
 
@@ -42,7 +47,15 @@ export default {
 				formData.append('description', this.description);
 				formData.append('answer', this.answer);
 				formData.append('file', this.file);
-				this.submitResult(formData);
+				this.submitResult(formData).then(() =>{
+					this.description = null;
+					this.answer = null;
+					this.file = null;
+					this.$refs.file.value = '';
+					this.fetchQuestion();
+					this.setUploadPercentage(0);
+				})
+				.catch(() => this.errors.push('Vastus on vale!'));
 			}
 		},
 		handleFileUpload: function(){

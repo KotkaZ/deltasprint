@@ -7,7 +7,8 @@ export default createStore({
         availableCompetitions: [],
         participant: {},
         progress: 0,
-        question: {}
+        question: {},
+        uploadPercentage: 0,
     },
     getters: {
         getAccessToken: state => state.accessToken,
@@ -15,6 +16,7 @@ export default createStore({
         getParticipant: state => state.participant,
         getProgress: state => state.progress,
         getQuestion: state => state.question,
+        getUploadPercentage: state => state.uploadPercentage,
     },
     mutations: {
         setAccessToken: (state, accessToken) => state.accessToken = accessToken,
@@ -22,6 +24,7 @@ export default createStore({
         setParticipant: (state, participant) => state.participant = participant,
         setProgress: (state, progress) => state.progress = progress,
         setQuestion: (state, question) => state.question = question,
+        setUploadPercentage: (state, uploadPercentage) => state.uploadPercentage = uploadPercentage,
     },
     actions: {
         async signinParticipant({ commit, dispatch }, participant) {
@@ -75,13 +78,16 @@ export default createStore({
             }
 
         },
-        async submitResult({ dispatch }, formData) {
+        async submitResult({ commit }, formData) {
             try {
-                await axios.post('answers', formData);
-                dispatch('fetchQuestion');
+                await axios.post('answers', formData, {
+                    onUploadProgress: function(progressEvent) {
+                        commit('setUploadPercentage', Math.round((progressEvent.loaded / progressEvent.total) * 100));
+                    }
+                });
 
             } catch (error) {
-                console.log(error);
+                if (error.response.status === 409) return new Promise.reject();
             }
         },
         setupHeaders({ getters }) {
