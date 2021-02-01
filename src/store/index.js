@@ -7,6 +7,7 @@ export default createStore({
         availableCompetitions: [],
         participant: {},
         progress: 0,
+        results: [],
         question: {},
         uploadPercentage: 0,
     },
@@ -15,6 +16,7 @@ export default createStore({
         getCompetitions: state => state.availableCompetitions,
         getParticipant: state => state.participant,
         getProgress: state => state.progress,
+        getResults: state => state.results,
         getQuestion: state => state.question,
         getUploadPercentage: state => state.uploadPercentage,
     },
@@ -23,6 +25,7 @@ export default createStore({
         setCompetitions: (state, competitions) => state.availableCompetitions = competitions,
         setParticipant: (state, participant) => state.participant = participant,
         setProgress: (state, progress) => state.progress = progress,
+        setResults: (state, results) => state.results = results,
         setQuestion: (state, question) => state.question = question,
         setUploadPercentage: (state, uploadPercentage) => state.uploadPercentage = uploadPercentage,
     },
@@ -77,6 +80,14 @@ export default createStore({
                 console.log(error);
             }
 
+        },
+        async fetchResults({ commit }, competition) {
+            try {
+                const response = await axios.get(`competitions/${competition}`);
+                commit('setResults', response.data);
+            } catch (error) {
+                console.log(error);
+            }
         },
         async submitResult({ commit }, formData) {
             try {
