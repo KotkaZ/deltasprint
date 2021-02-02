@@ -57,7 +57,7 @@ export default createStore({
         async fetchQuestion({ commit }) {
             try {
                 const response = await axios.get('questions');
-                commit('setQuestion', response.data[0]);
+                commit('setQuestion', response.data);
             } catch (error) {
                 console.log(error);
             }
@@ -66,7 +66,7 @@ export default createStore({
         async fetchProgress({ commit }) {
             try {
                 const response = await axios.get('answers');
-                commit('setProgress', Number(response.data[0].value));
+                commit('setProgress', Number(response.data.value));
             } catch (error) {
                 console.log(error);
             }
@@ -75,7 +75,7 @@ export default createStore({
         async fetchParticipant({ commit }) {
             try {
                 const response = await axios.get('participants');
-                commit('setParticipant', response.data[0]);
+                commit('setParticipant', response.data);
             } catch (error) {
                 console.log(error);
             }

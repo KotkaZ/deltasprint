@@ -35,28 +35,40 @@ export default {
     methods: {
 		...mapActions(['submitResult', 'fetchQuestion']),
 		...mapMutations(['setUploadPercentage']),
-		submit: function () {		
+		submit: async function () {		
 			this.errors = [];
 
 			if (!this.description) this.errors.push('Lahenduskäik on puudu!');
 			if (!this.answer) this.errors.push('Vastus on puudu!');
 
-			if(!this.errors.length){
-				let formData = new FormData();
-				formData.append('question', this.question.id);
-				formData.append('description', this.description);
-				formData.append('answer', this.answer);
-				formData.append('file', this.file);
-				this.submitResult(formData).then(() =>{
+			if(this.errors.length) return;
+			
+			let formData = new FormData();
+			formData.append('question', this.question.id);
+			formData.append('description', this.description);
+			formData.append('answer', this.answer);
+			formData.append('file', this.file);
+
+			try{
+				await this.submitResult(formData);
+				if(this.question.number === this.question.total){
+					console.log("Tere")
+				}
+				else{
 					this.description = null;
 					this.answer = null;
-					this.file = null;
+					this.file = '';
 					this.$refs.file.value = '';
 					this.fetchQuestion();
-					this.setUploadPercentage(0);
-				})
-				.catch(() => this.errors.push('Vastus on vale!'));
+				}
 			}
+			catch(error){
+				this.errors.push('Vastus on vale!');
+			}
+			finally{
+				this.setUploadPercentage(0);
+			}
+			
 		},
 		handleFileUpload: function(){
 			this.file = this.$refs.file.files[0];
