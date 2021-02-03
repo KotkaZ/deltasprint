@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <LoginWindow :competitions="getCompetitions" class="login"></LoginWindow>
-  </div>
+  <LoginWindow :competitions="getCompetitions" class="login"/>
 </template>
 
 <script>
@@ -28,8 +26,12 @@ export default {
 
 <style scoped>
 .login {
+  position: fixed;
   top: 50%;
-  -ms-transform: translateY(50%);
-  transform: translateY(50%);
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
 </style>
