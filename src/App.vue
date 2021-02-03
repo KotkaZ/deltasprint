@@ -1,5 +1,7 @@
 <template>
   <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lora" />
+  <ConfirmDialog/>
+	<Toast/>
   <Header></Header>
   <router-view/>
 </template>
@@ -10,10 +12,16 @@ import Header from './components/Header.vue'
 import 'primevue/resources/themes/saga-blue/theme.css'        //theme
 import 'primevue/resources/primevue.min.css'                  //core css
 import 'primeicons/primeicons.css'                            //icons
+import 'primeflex/primeflex.css'
+
+import ConfirmDialog from 'primevue/confirmdialog';
+import Toast from 'primevue/toast';
 
 export default {
   components: {
-    Header
+    Header,
+    ConfirmDialog,
+    Toast
   },
   methods: {
     ...mapActions(['setupHeaders'])
@@ -26,7 +34,7 @@ export default {
 
 <style>
 * {
-  font-family: 'Lora';
+  /*font-family: 'Lora';*/
   outline: none;
   box-sizing: border-box;
   padding: 0;
