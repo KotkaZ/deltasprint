@@ -1,29 +1,56 @@
 <template>
-  <form @submit.prevent="submit">
-    <legend><span class="number">!</span> Lahendus</legend>
-    <textarea v-model="description" placeholder="Lahenduskäik"></textarea>
-    <input type="text" v-model="answer" placeholder="Vastus">
-	<input type="file" id="file" ref="file" v-on:change="handleFileUpload()">
-	<progress max="100" :value="getUploadPercentage"></progress>
+	
+	<div id="form" class="p-fluid p-grid">
 
-    <p v-if="errors.length">
-        <b>Palun paranda järgnevad vead:</b>
-        <ul>
-            <li v-for="error in errors" :key="error">{{ error }}</li>
-        </ul>
-    </p>
+		<div class="p-field p-col-12">
+			<Editor v-model="description" editorStyle="height: 320px" placeholder="Lahenduse kirjeldus"/>
+		</div>
 
-    <input type="submit" value="Esita lahendus"/>
-  </form>
+		
+		<div class="p-field p-col-12 p-md-6">
+			<span class="p-float-label">
+				<InputText type="text" v-model="answer"/>
+				<label>Vastus</label>
+			</span>
+		</div>
+
+		<div class="p-field p-col-12 p-md-6">
+			<ProgressBar :value="getUploadPercentage" />
+		</div>
+
+		<div class="p-field p-col-12">
+			<FileUpload name="demo[]" :maxFileSize="3000000" :fileLimit="1" :showUploadButton="false"
+				chooseLabel="Vali fail" :auto="true" :customUpload="true" @uploader="fileHandler" ref="files">
+				<template #empty><p>Lohista failid siia...</p></template>
+			</FileUpload>
+		</div>
+
+		<div class="p-field p-col-12">
+			<Button @click="submitAnswer()" icon="pi pi-send" label="Esita lahendus"/>
+		</div>
+
+	</div>
 </template>
 
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex';
+import Editor from 'primevue/editor/sfc';
+import InputText from 'primevue/inputtext/sfc';
+import Button from 'primevue/button/sfc';
+import FileUpload from 'primevue/fileupload/sfc';
+import ProgressBar from 'primevue/progressbar/sfc';
+
 export default {
-    name: "ExerciseSolution",
+	name: "ExerciseSolution",
+	components:{
+		Editor,
+		InputText,
+		Button,
+		FileUpload,
+		ProgressBar
+	},
     data: function(){
       return {
-		errors: [],
 		description: null,
 		answer: null,
 		file: ''
@@ -35,43 +62,49 @@ export default {
     methods: {
 		...mapActions(['submitResult', 'fetchQuestion']),
 		...mapMutations(['setUploadPercentage']),
-		submit: async function () {		
-			this.errors = [];
+		submitAnswer: async function () {	
 
-			if (!this.description) this.errors.push('Lahenduskäik on puudu!');
-			if (!this.answer) this.errors.push('Vastus on puudu!');
+			if (!this.description && !this.file){
+				this.$toast.add({severity:'error', summary: 'Veateade', detail:'Lahenduskäik on puudu. Lisage see tektsi või failikujul.', life: 3000});
+			}
+			else if (!this.answer){
+				this.$toast.add({severity:'error', summary: 'Veateade', detail:'Vastus on puudu.', life: 3000});
+			}
+			else{
+				let formData = new FormData();
+				formData.append('question', this.question.id);
+				formData.append('description', this.description);
+				formData.append('answer', this.answer);
+				formData.append('file', this.file);
 
-			if(this.errors.length) return;
-			
-			let formData = new FormData();
-			formData.append('question', this.question.id);
-			formData.append('description', this.description);
-			formData.append('answer', this.answer);
-			formData.append('file', this.file);
+				try{
+					await this.submitResult(formData);
+					this.$toast.add({severity:'success', summary: 'Teade', detail:'Lahendus edukalt esitatud', life: 3000});
 
-			try{
-				await this.submitResult(formData);
-				if(this.question.number === this.question.total){
-					console.log("Tere")
+					if(this.question.number === this.question.total){
+						this.$toast.add({severity:'success', summary: 'Teade', detail:'Võistlus edukalt lõpetatud!', life: 3000});
+						//TODO
+					}
+					else{
+						this.description = null;
+						this.answer = null;
+						this.file = '';
+						this.$refs.files.clear();
+						this.fetchQuestion();
+					}
 				}
-				else{
-					this.description = null;
-					this.answer = null;
-					this.file = '';
-					this.$refs.file.value = '';
-					this.fetchQuestion();
+				catch(error){
+					let message = error.message;
+					if(error.response && error.response.status == 409) message = "Vastus on vale!"
+					this.$toast.add({severity:'error', summary: 'Veateade', detail:message, life: 3000});
 				}
-			}
-			catch(error){
-				this.errors.push('Vastus on vale!');
-			}
-			finally{
-				this.setUploadPercentage(0);
-			}
-			
+				finally{
+					this.setUploadPercentage(0);
+				}
+			}	
 		},
-		handleFileUpload: function(){
-			this.file = this.$refs.file.files[0];
+		fileHandler: function(event){
+			this.file = event.files[0];
 		}
 	},
 	props: ['question']
@@ -79,115 +112,12 @@ export default {
 </script>
 
 <style scoped>
-b {
-    color: #B5002F;
-}
-ul {
-    font-weight: bold;
-    margin-left: 15px;
-    margin-bottom: 15px;
-}
-form {
-  flex-basis: 70%;
-  margin: 10px;
+#form {
+	flex-basis: 70%;
+	margin: 10px;
 	background: #f4f7f8;
 	padding: 20px;
 	background: #f4f7f8;
 	border-radius: 8px;
-}
-form fieldset{
-	border: none;
-}
-form legend {
-	font-size: 1.4em;
-	margin-bottom: 10px;
-}
-form label {
-	display: block;
-	margin-bottom: 8px;
-}
-form input[type="text"],
-form input[type="date"],
-form input[type="datetime"],
-form input[type="email"],
-form input[type="number"],
-form input[type="search"],
-form input[type="time"],
-form input[type="url"],
-form textarea,
-form select {
-	background: rgba(255,255,255,.1);
-	border: none;
-	border-radius: 4px;
-	font-size: 15px;
-	margin: 0;
-	outline: 0;
-	padding: 10px;
-	width: 100%;
-	box-sizing: border-box; 
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box; 
-	background-color: #e8eeef;
-	color:#8a97a0;
-	-webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
-	box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
-	margin-bottom: 30px;
-}
-form textarea{
-  resize: vertical;
-  height: 200px;
-}
-form input[type="text"]:focus,
-form input[type="date"]:focus,
-form input[type="datetime"]:focus,
-form input[type="email"]:focus,
-form input[type="number"]:focus,
-form input[type="search"]:focus,
-form input[type="time"]:focus,
-form input[type="url"]:focus,
-form textarea:focus,
-form select:focus{
-	background: #d2d9dd;
-}
-form select{
-	-webkit-appearance: menulist-button;
-	height:35px;
-}
-form .number {
-	background: #B79A31;
-	color: #fff;
-	height: 30px;
-	width: 30px;
-	display: inline-block;
-	font-size: 0.8em;
-	margin-right: 4px;
-	line-height: 30px;
-	text-align: center;
-	text-shadow: 0 1px 0 rgba(255,255,255,0.2);
-	border-radius: 15px 15px 15px 0px;
-}
-
-form input[type="submit"],
-form input[type="button"]
-{
-	position: relative;
-	display: block;
-	padding: 19px 39px 18px 39px;
-	color: #FFF;
-	margin: 0 auto;
-	background: #B79A31;
-	font-size: 18px;
-	text-align: center;
-	font-style: normal;
-	width: 100%;
-	border: 1px solid #B5002F;
-	border-width: 1px 1px 3px;
-    border-radius: 4px;
-	margin-bottom: 10px;
-}
-form input[type="submit"]:hover,
-form input[type="button"]:hover
-{
-	background: #109177;
 }
 </style>

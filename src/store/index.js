@@ -90,16 +90,11 @@ export default createStore({
             }
         },
         async submitResult({ commit }, formData) {
-            try {
-                await axios.post('answers', formData, {
-                    onUploadProgress: function(progressEvent) {
-                        commit('setUploadPercentage', Math.round((progressEvent.loaded / progressEvent.total) * 100));
-                    }
-                });
-
-            } catch (error) {
-                if (error.response.status === 409) return new Promise.reject();
-            }
+            await axios.post('answers', formData, {
+                onUploadProgress: function(progressEvent) {
+                    commit('setUploadPercentage', Math.round((progressEvent.loaded / progressEvent.total) * 100));
+                }
+            });
         },
         setupHeaders({ getters }) {
             axios.defaults.headers.common['accessToken'] = getters.getAccessToken;
