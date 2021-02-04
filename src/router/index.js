@@ -19,14 +19,20 @@ const routes = [{
     {
         path: '/register',
         name: 'Registration',
-        component: Register
+        component: Register,
+        beforeEnter: (to, from, next) => {
+            if (store.getters.getAccessToken) next('Competition');
+            else next();
+        }
+
     },
     {
         path: '/competition',
         name: 'Competition',
         component: Competition,
-        meta: {
-            requiresAuth: true
+        beforeEnter: (to, from, next) => {
+            if (store.getters.getAccessToken) next();
+            else next('Register');
         }
     },
     {
@@ -41,15 +47,5 @@ const router = createRouter({
     routes
 })
 
-router.beforeEach((to, from, next) => {
-    if (to.matched.some(record => record.meta.requiresAuth)) {
-        if (store.getters.getAccessToken) {
-            next();
-            return;
-        }
-        next('Register');
-    } else next();
-
-})
 
 export default router
