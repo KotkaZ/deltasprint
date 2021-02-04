@@ -15,16 +15,9 @@ export default {
 
 <style scoped>
 div {
-  margin: 10px;
-  flex-basis: 100%;
-  max-width: 500px;
-  padding: 10px 20px;
   background: #f4f7f8;
   padding: 20px;
-  background: #f4f7f8;
   border-radius: 8px;
-
-  display: flex;
 }
 
 div .number {

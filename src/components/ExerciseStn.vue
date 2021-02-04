@@ -1,6 +1,6 @@
 <template>
 	
-	<div id="form" class="p-fluid p-grid">
+	<div class="form p-fluid p-grid">
 
 		<div class="p-field p-col-12">
 			<Editor v-model="description" editorStyle="height: 320px" placeholder="Lahenduse kirjeldus"/>
@@ -112,10 +112,8 @@ export default {
 </script>
 
 <style scoped>
-#form {
-	flex-basis: 70%;
-	margin: 10px;
-	background: #f4f7f8;
+div.form {
+	margin: 0;
 	padding: 20px;
 	background: #f4f7f8;
 	border-radius: 8px;

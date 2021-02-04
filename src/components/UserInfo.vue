@@ -4,7 +4,7 @@
         <p><strong>Matrikli nr:</strong> {{ participant.studentcode }}</p>
         <p><strong>Email:</strong> {{ participant.email }}</p>
         <p><strong>Ekraani mõõtmed:</strong> {{ screenSize }}</p>
-        <video ref="camera" :width="450" :height="357.5" autoplay></video>
+        <video ref="camera" autoplay></video>
     </div>
   
 </template>
@@ -43,13 +43,13 @@ p {
 }
 
 div {
-    margin: 10px;
-    flex-basis: 30%;
-    max-width: 500px;
-    padding: 10px 20px;
     background: #f4f7f8;
     padding: 20px;
-    background: #f4f7f8;
     border-radius: 8px;
+}
+
+video {
+    width: 100%;
+    height: auto;
 }
 </style>
