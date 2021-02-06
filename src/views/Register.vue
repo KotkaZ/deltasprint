@@ -1,5 +1,7 @@
 <template>
-  <LoginWindow :competitions="getCompetitions" class="login"/>
+  <div class="wrapper p-grid p-jc-center p-ai-center vertical-container p-nogutter">
+    <LoginWindow :competitions="getCompetitions" class="p-col-12 p-md-8 p-lg-6 p-xl-4 p-shadow-12"/>
+  </div>
 </template>
 
 <script>
@@ -25,13 +27,7 @@ export default {
 </script>
 
 <style scoped>
-.login {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  -ms-transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  -moz-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
+.wrapper {
+  height: calc(100vh - 62px);
 }
 </style>

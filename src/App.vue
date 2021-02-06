@@ -1,7 +1,7 @@
 <template>
   <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lora" />
   <ConfirmDialog/>
-	<Toast/>
+  <Toast/>
   <Header></Header>
   <router-view/>
 </template>
@@ -36,21 +36,14 @@ export default {
 * {
   /*font-family: 'Lora';*/
   outline: none;
-  box-sizing: border-box;
-  padding: 0;
   margin: 0;
 }
 
-html,
-body {
-  width: 100%;
-  height: 100%;
-}
-
 
 body {
-  background-image: url('assets/background.jpg');
-  color: #1B1B1F;
+  /*background-image: url('assets/background.jpg');*/
+  color: #FFFFFF;
 }
+
 
 </style>
