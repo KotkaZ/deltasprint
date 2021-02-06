@@ -87,7 +87,15 @@ export default {
         }
     },
     methods: {
-        ...mapActions(['signinParticipant']),
+		...mapActions(['signinParticipant','removeHeaders']),
+		toast: function(error) {
+            this.$toast.add({
+				severity:'error',
+				summary: 'Veateade',
+				detail: error,
+				life: 3000
+			});
+		},
         validateData: function () {
 			const schema = joi.object().keys({
 				firstname: joi.string().alphanum().min(3).max(45).required().label('Eesnimi'),
@@ -105,23 +113,22 @@ export default {
                 message: 'Oled valmis võistlusega alustama?',
                 header: 'Kinnitus',
                 icon: 'pi pi-exclamation-triangle',
-                accept: () => {
-					const validationResult = this.validateData();
-                    if(validationResult.error){
-						this.$toast.add({severity:'error', summary: 'Veateade', detail:`${validationResult.error.details[0].message}`, life: 3000});
-					}
-					else{
-						this.signinParticipant(this.participant).then(() => {
-							this.$router.push('Competition');
-						})
-						.catch(error => {
-							this.$toast.add({severity:'error', summary: 'Veateade', detail:`${error.message}`, life: 3000});
-						});
-
-					}	
-                },
+                accept: () => this.submitAnswer(),
                 reject: () => {}
             });
+		},
+		submitAnswer: async function () {
+			try{
+				const validationResult = this.validateData();
+				if(validationResult.error) throw validationResult.error.details[0];
+				await this.signinParticipant(this.participant);
+				this.$router.push('Competition');
+			}
+			catch(error) {
+				console.error(error);
+				this.toast(error.message);
+				this.removeHeaders();
+			}
 		}
 	},
 	props: ['competitions']

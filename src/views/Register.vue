@@ -17,10 +17,23 @@ export default {
     ...mapGetters(['getCompetitions'])
   },
   methods: {
-    ...mapActions(['fetchCompetitions'])
+    ...mapActions(['fetchCompetitions']),
+    toast: function(error) {
+      this.$toast.add({
+        severity:'error',
+        summary: 'Veateade',
+        detail: error.message,
+        life: 3000
+      });
+    }
   },
-  beforeMount() {
-    this.fetchCompetitions();
+  created: async function() {
+    try{
+      await this.fetchCompetitions();
+    } catch(error) {
+      console.error(error);
+      this.toast(error);
+    }
   }
 
 }

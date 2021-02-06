@@ -30,7 +30,7 @@ _axios.interceptors.response.use(
     },
     function(error) {
         // Do something with response error
-        if (error.response.status === 403 && error.response.config && !error.config._isRetryRequest) {
+        if (error.response && error.response.status === 403 && error.response.config && !error.config._isRetryRequest) {
             store.dispatch('removeHeaders');
         }
 

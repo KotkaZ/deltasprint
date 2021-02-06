@@ -62,14 +62,18 @@ export default {
     methods: {
 		...mapActions(['submitResult', 'fetchQuestion']),
 		...mapMutations(['setUploadPercentage']),
+		toast: function(message) {
+			this.$toast.add({
+				severity:'error',
+				summary: 'Veateade',
+				detail: message,
+				life: 3000
+			});
+		},
 		submitAnswer: async function () {	
 
-			if (!this.description && !this.file){
-				this.$toast.add({severity:'error', summary: 'Veateade', detail:'Lahenduskäik on puudu. Lisage see tektsi või failikujul.', life: 3000});
-			}
-			else if (!this.answer){
-				this.$toast.add({severity:'error', summary: 'Veateade', detail:'Vastus on puudu.', life: 3000});
-			}
+			if (!this.description && !this.file) this.toast('Lahenduskäik on puudu. Lisage see tektsi või failikujul.');
+			else if (!this.answer) this.toast('Vastus on puudu.');
 			else{
 				let formData = new FormData();
 				formData.append('question', this.question.id);
@@ -90,13 +94,13 @@ export default {
 						this.answer = null;
 						this.file = '';
 						this.$refs.files.clear();
-						this.fetchQuestion();
+						await this.fetchQuestion();
 					}
 				}
 				catch(error){
 					let message = error.message;
 					if(error.response && error.response.status == 409) message = "Vastus on vale!"
-					this.$toast.add({severity:'error', summary: 'Veateade', detail:message, life: 3000});
+					this.toast(message);
 				}
 				finally{
 					this.setUploadPercentage(0);

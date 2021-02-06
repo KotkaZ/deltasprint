@@ -45,15 +45,33 @@ export default {
   },
   methods: {
     ...mapActions(['fetchResults', 'fetchCompetitions']),
-    onChange: function() {
-      this.fetchResults(this.selectedCompetition.id);
+    onChange: async function() {
+      try{
+        await this.fetchResults(this.selectedCompetition.id);
+      } catch(error) {
+        console.error(error);
+        this.toast(error);
+      }
     },
     exportCSV() {
       this.$refs.dt.exportCSV();
+    },
+    toast: function(error) {
+      this.$toast.add({
+        severity:'error',
+        summary: 'Veateade',
+        detail: error.message,
+        life: 3000
+      });
     }
   },
-  beforeMount() {
-    this.fetchCompetitions();
+  created: async function() {
+    try{
+      await this.fetchCompetitions();
+    } catch(error) {
+      console.error(error);
+      this.toast(error);
+    }
   }
 
 }

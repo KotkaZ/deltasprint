@@ -37,12 +37,26 @@ export default {
     ...mapGetters(['getAccessToken', 'getQuestion', 'getParticipant', 'getProgress'])
   },
   methods: {
-    ...mapActions(['fetchQuestion', 'fetchParticipant', 'fetchProgress'])
+    ...mapActions(['fetchQuestion', 'fetchParticipant', 'fetchProgress']),
+    toast: function(error) {
+      this.$toast.add({
+        severity:'error',
+        summary: 'Veateade',
+        detail: error.message,
+        life: 3000
+      });
+    }
   },
-  beforeMount() {
-      if(Object.keys(this.getParticipant).length === 0) this.fetchParticipant();
-      this.fetchQuestion();
-      this.fetchProgress();
+  created: async function() {
+    try{
+      if(Object.keys(this.getParticipant).length === 0) await this.fetchParticipant();
+      await this.fetchQuestion();
+      await this.fetchProgress();
+    } catch(error) {
+      console.error(error);
+      this.toast(error);
+    }
+    
   }
 
 }

@@ -19,6 +19,14 @@ export default {
     },
     props: ["participant"],
     methods: {
+        toast: function(error) {
+            this.$toast.add({
+            severity:'error',
+            summary: 'Veateade',
+            detail: error.message,
+            life: 3000
+        });
+    }
     },
     computed: {
         screenSize : () => `${screen.width} x ${screen.height}`
@@ -32,7 +40,7 @@ export default {
         navigator.mediaDevices
             .getUserMedia(constraints)
             .then(stream => this.$refs.camera.srcObject = stream)
-            .catch(() => alert("Veebilehitseja ei toetanud kaamera avamist."));
+            .catch(() => this.toast(new Error("Veebilehitseja ei toeta kaamerat!")));
         
     }
 

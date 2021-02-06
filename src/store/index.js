@@ -31,63 +31,33 @@ export default createStore({
     },
     actions: {
         async signinParticipant({ commit, dispatch }, participant) {
-            try {
-                const response = await axios.post('participants', participant)
+            const response = await axios.post('participants', participant)
 
-                const accessToken = response.data.accessToken;
-                localStorage.setItem('accessToken', accessToken);
-                commit('setAccessToken', accessToken);
+            const accessToken = response.data.accessToken;
+            localStorage.setItem('accessToken', accessToken);
+            commit('setAccessToken', accessToken);
 
-                dispatch('setupHeaders');
-
-            } catch (error) {
-                dispatch('removeHeaders');
-                throw error;
-            }
+            dispatch('setupHeaders');
         },
         async fetchCompetitions({ commit }) {
-            try {
-                const response = await axios.get('competitions');
-                commit('setCompetitions', response.data);
-            } catch (error) {
-                console.log(error);
-            }
-
+            const response = await axios.get('competitions');
+            commit('setCompetitions', response.data);
         },
         async fetchQuestion({ commit }) {
-            try {
-                const response = await axios.get('questions');
-                commit('setQuestion', response.data);
-            } catch (error) {
-                console.log(error);
-            }
-
+            const response = await axios.get('questions');
+            commit('setQuestion', response.data);
         },
         async fetchProgress({ commit }) {
-            try {
-                const response = await axios.get('answers');
-                commit('setProgress', Number(response.data.value));
-            } catch (error) {
-                console.log(error);
-            }
-
+            const response = await axios.get('answers');
+            commit('setProgress', Number(response.data.value));
         },
         async fetchParticipant({ commit }) {
-            try {
-                const response = await axios.get('participants');
-                commit('setParticipant', response.data);
-            } catch (error) {
-                console.log(error);
-            }
-
+            const response = await axios.get('participants');
+            commit('setParticipant', response.data);
         },
         async fetchResults({ commit }, competition) {
-            try {
-                const response = await axios.get(`competitions/${competition}`);
-                commit('setResults', response.data);
-            } catch (error) {
-                console.log(error);
-            }
+            const response = await axios.get(`competitions/${competition}`);
+            commit('setResults', response.data);
         },
         async submitResult({ commit }, formData) {
             await axios.post('answers', formData, {

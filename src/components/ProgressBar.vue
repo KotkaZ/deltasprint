@@ -7,9 +7,7 @@
 <script>
 export default {
     name: "ProgressBar",
-    props: ['numberOfTasks','myProgress','bestProgress'],
-    created: function () {
-    }
+    props: ['numberOfTasks','myProgress','bestProgress']
 }
 </script>
 
