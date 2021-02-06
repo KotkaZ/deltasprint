@@ -42,7 +42,7 @@ export default {
 
 body {
   /*background-image: url('assets/background.jpg');*/
-  color: #FFFFFF;
+  color: #000000;
 }
 
 

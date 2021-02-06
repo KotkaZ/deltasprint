@@ -1,19 +1,21 @@
 <template>
     <div>
-        <p><strong>Nimi:</strong> {{ participant.firstname + " " + participant.lastname }}</p>
-        <p><strong>Matrikli nr:</strong> {{ participant.studentcode }}</p>
-        <p><strong>Email:</strong> {{ participant.email }}</p>
-        <p><strong>Ekraani mõõtmed:</strong> {{ screenSize }}</p>
+        <i class="pi pi-user"><strong> Nimi:</strong> {{ participant.firstname + " " + participant.lastname }}</i><br>
+        <i class="pi pi-tag"><strong> Matrikli nr:</strong> {{ participant.studentcode }}</i><br>
+        <i class="pi pi-envelope"><strong> Email:</strong> {{ participant.email }}</i><br>
+        <i class="pi pi-window-maximize"><strong> Ekraani mõõtmed:</strong> {{ screenSize }}</i><br>
+        <Divider />
         <video ref="camera" autoplay></video>
     </div>
   
 </template>
 
 <script>
+import Divider from 'primevue/divider';
 export default {
     name: "UserInfo",
     components: {
-        
+        Divider
     },
     props: ["participant"],
     methods: {
