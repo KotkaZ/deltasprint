@@ -30,7 +30,7 @@
             </template>
 
             <p>Kuidas on teie üldine rahulolu korraldusega?</p>
-            <Rating v-model="event.overallRaiting" />
+            <Rating v-model="event.overallRating" />
             <br>
 
             <p>Kui tõenäoline on, et osaleksite veel DeltaSprindil või soovitaksite seda sõbrale?</p>
@@ -59,7 +59,7 @@
             </template>
 
             <p>Kuidas vastasid ülesanded teie ootustele?</p>
-            <Rating v-model="tasks.opinionRaiting" />
+            <Rating v-model="tasks.opinionRating" />
             <br>
 
             <p>Kuidas hindate ülesannete variatsiooni?</p>
@@ -86,7 +86,7 @@
             </template>
 
             <p>Kuidas jäite rahule keskkonna visuaalse poolega?</p>
-            <Rating v-model="ui.visualRaiting" />
+            <Rating v-model="ui.visualRating" />
             <br>
 
             <p>Kui lihtne oli keskkonnas navigeerida? (5 - väga lihtne) </p>
@@ -129,21 +129,21 @@ export default {
         return{
             event:{
                 competition: this.$route.params.id,
-                overallRaiting: 0,
+                overallRating: 0,
                 recommendRating: 0,
                 formatRating: 0,
                 from: '',
                 toChange: ''
             },
             tasks: {
-                opinionRaiting: 0,
+                opinionRating: 0,
                 varianceRating: 0,
                 toolsUsed: '',
                 hardTasks: '',
                 futureTasks: ''
             },
             ui: {
-                visualRaiting: 0,
+                visualRating: 0,
                 navigationRating: 0,
                 difficulties: '',
                 newFeatures: '',
