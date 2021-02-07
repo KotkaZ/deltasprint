@@ -60,7 +60,7 @@ export default {
 		...mapGetters(['getUploadPercentage']),
 	},
     methods: {
-		...mapActions(['submitResult', 'fetchQuestion']),
+		...mapActions(['submitResult', 'fetchQuestion', 'removeHeaders']),
 		...mapMutations(['setUploadPercentage']),
 		toast: function(message) {
 			this.$toast.add({
@@ -87,7 +87,8 @@ export default {
 
 					if(this.question.number === this.question.total){
 						this.$toast.add({severity:'success', summary: 'Teade', detail:'Võistlus edukalt lõpetatud!', life: 3000});
-						//TODO
+						this.removeHeaders();
+						this.$router.push({ name: 'Feedback', params: { id: this.competition } });
 					}
 					else{
 						this.description = null;
@@ -111,7 +112,7 @@ export default {
 			this.file = event.files[0];
 		}
 	},
-	props: ['question']
+	props: ['question', 'competition']
 }
 </script>
 

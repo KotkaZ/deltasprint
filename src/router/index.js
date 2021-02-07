@@ -4,6 +4,7 @@ import About from '../views/About.vue'
 import Competition from '../views/Competition.vue'
 import Results from '../views/Results.vue'
 import Register from '../views/Register.vue'
+import Feedback from '../views/Feedback.vue'
 import store from '../store'
 
 const routes = [{
@@ -33,6 +34,15 @@ const routes = [{
         beforeEnter: (to, from, next) => {
             if (store.getters.getAccessToken) next();
             else next('Register');
+        }
+    },
+    {
+        path: '/feedback/:id',
+        name: 'Feedback',
+        component: Feedback,
+        beforeEnter: (to, from, next) => {
+            if (from.name !== 'Competition') next('/');
+            else next();
         }
     },
     {

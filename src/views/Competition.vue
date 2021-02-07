@@ -13,7 +13,7 @@
     </div>
 
     <div class="p-field p-col-12 p-md-9">
-      <ExcerciseStn :question="getQuestion"></ExcerciseStn>
+      <ExcerciseStn :competition="getParticipant.competition" :question="getQuestion"></ExcerciseStn>
     </div>
   </div>
 </template>
