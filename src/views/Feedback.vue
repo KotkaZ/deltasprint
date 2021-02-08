@@ -107,20 +107,24 @@
 
         </AccordionTab>
     </Accordion>
+    <Button></Button>
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 import Accordion from 'primevue/accordion/sfc';
 import AccordionTab from 'primevue/accordiontab';
 import Rating from 'primevue/rating';
 import Textarea from 'primevue/textarea';
 import Divider from 'primevue/divider';
+import Button from 'primevue/button';
 
 export default {
     name: "Feedback",
     components: {
         Accordion,
         AccordionTab,
+        Button,
         Rating,
         Textarea,
         Divider
@@ -150,6 +154,9 @@ export default {
                 preferences: ''
             }
         }
+    },
+    methods: {
+        ...mapActions(['submitFeedback'])
     }
 
 }

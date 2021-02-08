@@ -66,6 +66,9 @@ export default createStore({
                 }
             });
         },
+        async submitFeedback(feedback) {
+            await axios.post(`feedback`, feedback);
+        },
         setupHeaders({ getters }) {
             axios.defaults.headers.common['accessToken'] = getters.getAccessToken;
         },
