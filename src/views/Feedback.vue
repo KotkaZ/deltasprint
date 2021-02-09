@@ -107,7 +107,7 @@
 
         </AccordionTab>
     </Accordion>
-    <Button></Button>
+    <Button @click="submit"></Button>
 </template>
 
 <script>
@@ -156,7 +156,17 @@ export default {
         }
     },
     methods: {
-        ...mapActions(['submitFeedback'])
+        ...mapActions(['submitFeedback']),
+        submit: async function(){
+            try{
+                await this.submitFeedback(this.data);
+                this.$toast.add({severity:'success', summary: 'Teade', detail:'Tagasiside antud', life: 3000});
+                this.$router.push('/');
+            }
+            catch(error) {
+                this.$toast.add({severity:'success', summary: 'Veateade', detail:error.message, life: 3000});
+            }
+        }
     }
 
 }
