@@ -66,7 +66,7 @@ export default createStore({
                 }
             });
         },
-        async submitFeedback(feedback) {
+        async submitFeedback(storeObject, feedback) {
             await axios.post(`feedback`, feedback);
         },
         setupHeaders({ getters }) {
