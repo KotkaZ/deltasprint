@@ -33,6 +33,11 @@ export default {
     ExcerciseStn, 
     UserInfo
   },
+  data(){
+    return {
+      timer: null
+    }
+  },
   computed: {
     ...mapGetters(['getAccessToken', 'getQuestion', 'getParticipant', 'getProgress'])
   },
@@ -51,13 +56,17 @@ export default {
     try{
       if(Object.keys(this.getParticipant).length === 0) await this.fetchParticipant();
       await this.fetchQuestion();
-      await this.fetchProgress();
+      this.timer = setInterval(this.fetchProgress, 15000);
+
     } catch(error) {
       console.error(error);
       this.toast(error);
-    }
-    
+    }  
+  },
+  beforeUnmount: function() {
+    clearInterval(this.timer);
   }
+
 
 }
 </script>

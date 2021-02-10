@@ -6,7 +6,7 @@ export default createStore({
         accessToken: localStorage.getItem('accessToken') || '',
         availableCompetitions: [],
         participant: {},
-        progress: 0,
+        progress: [],
         results: [],
         question: {},
         uploadPercentage: 0,
@@ -49,7 +49,7 @@ export default createStore({
         },
         async fetchProgress({ commit }) {
             const response = await axios.get('answers');
-            commit('setProgress', Number(response.data.value));
+            commit('setProgress', response.data);
         },
         async fetchParticipant({ commit }) {
             const response = await axios.get('participants');

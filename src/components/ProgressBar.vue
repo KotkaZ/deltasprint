@@ -1,13 +1,18 @@
 <template>
-  <div>
-    <p class="number" v-for="nr in numberOfTasks" :key="nr" :class="{ best: bestProgress == nr, my: myProgress == nr}">{{nr}}</p>
+  <div @click="test">
+    <p class="number" v-for="nr in numberOfTasks" v-badge="bestProgress[nr-1] ? bestProgress[nr-1].total : 0" :key="nr" :class="{ my: myProgress == nr}">{{nr}}</p>
   </div>
 </template>
 
 <script>
 export default {
     name: "ProgressBar",
-    props: ['numberOfTasks','myProgress','bestProgress']
+    props: ['numberOfTasks','myProgress','bestProgress'],
+    methods:{
+      test: function(){
+        console.log(this.bestProgress)
+      }
+    }
 }
 </script>
 
