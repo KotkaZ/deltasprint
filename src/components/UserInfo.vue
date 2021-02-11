@@ -35,16 +35,19 @@ export default {
     computed: {
         screenSize : () => `${screen.width} x ${screen.height}`
     },
-    created: function() {
-        const constraints = (window.constraints = {
-            audio: false,
-            video: true
-        });
+    created: async function() {
+        try{
+            const constraints = (window.constraints = {
+                audio: false,
+                video: true
+            });
 
-        navigator.mediaDevices
-            .getUserMedia(constraints)
-            .then(stream => this.$refs.camera.srcObject = stream)
-            .catch(() => this.toast(new Error("Veebilehitseja ei toeta kaamerat!")));
+            const stream = await navigator.mediaDevices.getUserMedia(constraints)
+            this.$refs.camera.srcObject = stream;
+        }
+        catch(error){
+            this.toast(new Error("Ei õnnestunud tuvastada kaamerapilti!"))
+        }
         
     }
 
