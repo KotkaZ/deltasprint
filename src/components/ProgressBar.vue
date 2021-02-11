@@ -1,6 +1,6 @@
 <template>
   <div @click="test">
-    <p class="number" v-for="nr in numberOfTasks" v-badge="bestProgress[nr-1] ? bestProgress[nr-1].total : 0" :key="nr" :class="{ my: myProgress == nr}">{{nr}}</p>
+    <p class="number" v-for="nr in numberOfTasks" v-badge="bestProgress[nr-1] ? bestProgress[nr-1].total : null" :key="nr" :class="{ my: myProgress == nr}">{{nr}}</p>
   </div>
 </template>
 

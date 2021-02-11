@@ -19,8 +19,8 @@
 		</div>
 
 		<div class="p-field p-col-12">
-			<FileUpload name="demo[]" :maxFileSize="3000000" :fileLimit="1" :showUploadButton="false"
-				chooseLabel="Vali fail" :auto="true" :customUpload="true" @uploader="fileHandler" ref="files">
+			<FileUpload name="demo[]" :maxFileSize="3000000" :fileLimit="1" :showUploadButton="false" :auto="true"
+				chooseLabel="Vali fail" :customUpload="true" @uploader="fileHandler" ref="files">
 				<template #empty><p>Lohista failid siia...</p></template>
 			</FileUpload>
 		</div>
@@ -95,6 +95,7 @@ export default {
 						this.answer = null;
 						this.file = '';
 						this.$refs.files.clear();
+						this.$refs.files.uploadedFileCount = 0;
 						await this.fetchQuestion();
 					}
 				}
