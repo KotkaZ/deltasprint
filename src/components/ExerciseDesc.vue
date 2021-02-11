@@ -1,27 +1,27 @@
 <template>
-    <div class="flex-container">
-        <div>
-            <h2>Kirjeldus</h2>
-            <p>{{ task.question }}</p>
-        </div>
-    </div>
-  
+    <Card>
+		<template #title>Ülesanne {{task.number}}.</template>
+
+		<template #content>
+            <span v-html="task.question"></span>
+        </template>
+    </Card>
 </template>
 
 <script>
+import Card from 'primevue/card/sfc';
+
 export default {
     name: "ExerciseDescribtion",
+    components: {
+        Card
+    },
     props: ['task']
 }
 </script>
 
 <style scoped>
 
-div.flex-container {
-    padding: 20px;
-    background: #f4f7f8;
-    border-radius: 8px;
-}
 
 
 
