@@ -1,51 +1,54 @@
 <template>
-	<BlockUI :blocked="blockedPanel">
-		<Card class="test">
-			<template #content>
-				<div class="p-fluid p-grid nested-grid">
-					<div class="p-col-12">
-						<Editor v-model="description" editorStyle="height: 320px" placeholder="Lahenduse kirjeldus"/>
-					</div>
+	<div class="test">
+		<ProgressSpinner class="spinner" v-if="blockedPanel" />
+		<BlockUI :blocked="blockedPanel">
+			<Card class="test">
+				<template #content>
+					<div class="p-fluid p-grid nested-grid">
+						<div class="p-col-12">
+							<Editor v-model="description" editorStyle="height: 320px" placeholder="Lahenduse kirjeldus"/>
+						</div>
 
-					
-					<div class="p-col-12 p-md-4">
-						<div class="p-grid">
-							<div class="p-col-12">	
-								<span class="p-float-label">
-									<InputText type="text" v-model="answer"/>
-									<label>Vastus</label>
-								</span>
-							</div>
-							<div class="p-col-12">
-								<ProgressBar :value="getUploadPercentage" />
+						
+						<div class="p-col-12 p-md-4">
+							<div class="p-grid">
+								<div class="p-col-12">	
+									<span class="p-float-label">
+										<InputText type="text" v-model="answer"/>
+										<label>Vastus</label>
+									</span>
+								</div>
+								<div class="p-col-12">
+									<ProgressBar :value="getUploadPercentage" />
+								</div>
 							</div>
 						</div>
+
+						
+
+						<div class="p-col-12 p-md-4">
+							<div class="p-grid">
+								<div class="p-col-12">
+									<FileUpload class="upload" :maxFileSize="3000000" :fileLimit="1" :auto="true"
+										chooseLabel="Vali fail" :customUpload="true" @uploader="fileHandler" mode="basic" ref="files">
+									</FileUpload>
+									<Button @click="clearFile()" :disabled="!file" icon="pi pi-times" />
+								</div>
+								<div class="p-col-12">
+									<h5>{{file ? file.name : ''}}</h5>
+								</div>
+							</div>						
+						</div>
+
+						<div class="p-col-12 p-md-4">
+							<Button @click="submitAnswer()" icon="pi pi-send" label="Esita lahendus"/>
+						</div>
+
 					</div>
-
-					
-
-					<div class="p-col-12 p-md-4">
-						<div class="p-grid">
-							<div class="p-col-12">
-								<FileUpload class="upload" :maxFileSize="3000000" :fileLimit="1" :auto="true"
-									chooseLabel="Vali fail" :customUpload="true" @uploader="fileHandler" mode="basic" ref="files">
-								</FileUpload>
-								<Button @click="clearFile()" :disabled="!file" icon="pi pi-times" />
-							</div>
-							<div class="p-col-12">
-								<h5>{{file ? file.name : ''}}</h5>
-							</div>
-						</div>						
-					</div>
-
-					<div class="p-col-12 p-md-4">
-						<Button @click="submitAnswer()" icon="pi pi-send" label="Esita lahendus"/>
-					</div>
-
-				</div>
-			</template>
-		</Card>
-	</BlockUI>
+				</template>
+			</Card>
+		</BlockUI>
+	</div>
 </template>
 
 <script>
@@ -57,6 +60,8 @@ import FileUpload from 'primevue/fileupload/sfc';
 import ProgressBar from 'primevue/progressbar/sfc';
 import Card from 'primevue/card/sfc';
 import BlockUI from 'primevue/blockui';
+import ProgressSpinner from 'primevue/progressspinner';
+
 
 export default {
 	name: "ExerciseSolution",
@@ -67,7 +72,8 @@ export default {
 		BlockUI,
 		Card,
 		FileUpload,
-		ProgressBar
+		ProgressBar,
+		ProgressSpinner
 	},
     data: function(){
       return {
@@ -146,5 +152,17 @@ export default {
 .upload{
 	display: inline;
 	margin-right: 5px;
+}
+.spinner{
+	margin: 0;
+	position: absolute;
+	z-index: 9999;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.test{
+	position: relative;
 }
 </style>
