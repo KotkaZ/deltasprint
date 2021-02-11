@@ -1,35 +1,37 @@
 <template>
-	
-	<div class="form p-fluid p-grid">
+	<Card>
+		<template #content>
+			<div class="p-fluid p-grid">
+				<div class="p-field p-col-12">
+					<Editor v-model="description" editorStyle="height: 320px" placeholder="Lahenduse kirjeldus"/>
+				</div>
 
-		<div class="p-field p-col-12">
-			<Editor v-model="description" editorStyle="height: 320px" placeholder="Lahenduse kirjeldus"/>
-		</div>
+				
+				<div class="p-field p-col-12 p-md-6">
+					<span class="p-float-label">
+						<InputText type="text" v-model="answer"/>
+						<label>Vastus</label>
+					</span>
+				</div>
 
-		
-		<div class="p-field p-col-12 p-md-6">
-			<span class="p-float-label">
-				<InputText type="text" v-model="answer"/>
-				<label>Vastus</label>
-			</span>
-		</div>
+				<div class="p-field p-col-12 p-md-6">
+					<ProgressBar :value="getUploadPercentage" />
+				</div>
 
-		<div class="p-field p-col-12 p-md-6">
-			<ProgressBar :value="getUploadPercentage" />
-		</div>
+				<div class="p-field p-col-12">
+					<FileUpload name="demo[]" :maxFileSize="3000000" :fileLimit="1" :showUploadButton="false" :auto="true"
+						chooseLabel="Vali fail" :customUpload="true" @uploader="fileHandler" ref="files">
+						<template #empty><p>Lohista failid siia...</p></template>
+					</FileUpload>
+				</div>
 
-		<div class="p-field p-col-12">
-			<FileUpload name="demo[]" :maxFileSize="3000000" :fileLimit="1" :showUploadButton="false" :auto="true"
-				chooseLabel="Vali fail" :customUpload="true" @uploader="fileHandler" ref="files">
-				<template #empty><p>Lohista failid siia...</p></template>
-			</FileUpload>
-		</div>
-
-		<div class="p-field p-col-12">
-			<Button @click="submitAnswer()" icon="pi pi-send" label="Esita lahendus"/>
-		</div>
-
-	</div>
+				<div class="p-field p-col-12">
+					<Button @click="submitAnswer()" icon="pi pi-send" label="Esita lahendus"/>
+				</div>
+			</div>
+			
+		</template>
+	</Card>
 </template>
 
 <script>
@@ -39,6 +41,7 @@ import InputText from 'primevue/inputtext/sfc';
 import Button from 'primevue/button/sfc';
 import FileUpload from 'primevue/fileupload/sfc';
 import ProgressBar from 'primevue/progressbar/sfc';
+import Card from 'primevue/card/sfc';
 
 export default {
 	name: "ExerciseSolution",
@@ -46,6 +49,7 @@ export default {
 		Editor,
 		InputText,
 		Button,
+		Card,
 		FileUpload,
 		ProgressBar
 	},
@@ -118,10 +122,4 @@ export default {
 </script>
 
 <style scoped>
-div.form {
-	margin: 0;
-	padding: 20px;
-	background: #f4f7f8;
-	border-radius: 8px;
-}
 </style>

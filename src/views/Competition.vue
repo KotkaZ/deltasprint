@@ -1,21 +1,28 @@
 <template>
-  <div class="layout p-fluid p-fromgrid p-grid">
-    <div class="p-field p-col-12 p-md-3">
-      <ProgressBar :numberOfTasks="getQuestion.total" :myProgress="getQuestion.number" :bestProgress="getProgress"></ProgressBar>
+  <div class="p-grid nested-grid p-nogutter">
+    <div class="p-col-12 p-lg-3">
+      <div class="p-grid p-nogutter">
+        <div class="layout p-col-12">
+          <ProgressBar :numberOfTasks="getQuestion.total" :myProgress="getQuestion.number" :bestProgress="getProgress"></ProgressBar>
+        </div>
+        <div class="layout p-col-12">
+          <UserInfo :participant="getParticipant"></UserInfo>
+        </div>
+      </div>
     </div>
 
-    <div class="p-field p-col-12 p-md-9">
-      <ExerciseDesc :task="getQuestion"></ExerciseDesc>
-    </div>
-
-    <div class="p-field p-col-12 p-md-3">
-      <UserInfo :participant="getParticipant"></UserInfo>
-    </div>
-
-    <div class="p-field p-col-12 p-md-9">
-      <ExcerciseStn :competition="getParticipant.competition" :question="getQuestion"></ExcerciseStn>
+    <div class="p-col-12 p-lg-9">
+      <div class="p-grid p-nogutter">
+        <div class="layout p-col-12">
+          <ExerciseDesc :task="getQuestion"></ExerciseDesc>
+        </div>
+        <div class="layout p-col-12">
+          <ExcerciseStn :competition="getParticipant.competition" :question="getQuestion"></ExcerciseStn>
+        </div>
+      </div>
     </div>
   </div>
+    
 </template>
 
 <script>
@@ -73,8 +80,7 @@ export default {
 
 <style scoped>
 .layout{
-  padding: 15px;
-  margin: 0;
+  padding: 8px;
 }
 
 </style>

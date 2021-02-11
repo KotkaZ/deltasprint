@@ -1,29 +1,26 @@
 <template>
-  <div @click="test">
-    <p class="number" v-for="nr in numberOfTasks" v-badge="bestProgress[nr-1] ? bestProgress[nr-1].total : null" :key="nr" :class="{ my: myProgress == nr}">{{nr}}</p>
-  </div>
+  <Card>
+    <template #title>Areng</template>
+    <template #content class="p-fluid"> 
+      <p class="number" v-for="nr in numberOfTasks" v-badge="bestProgress[nr-1] ? bestProgress[nr-1].total : null"
+       :key="nr" :class="{ my: myProgress == nr}">{{nr}}</p>      
+    </template>
+  </Card>
 </template>
 
 <script>
+import Card from 'primevue/card/sfc';
 export default {
     name: "ProgressBar",
+    components: {
+      Card
+    },
     props: ['numberOfTasks','myProgress','bestProgress'],
-    methods:{
-      test: function(){
-        console.log(this.bestProgress)
-      }
-    }
 }
 </script>
 
 <style scoped>
-div {
-  background: #f4f7f8;
-  padding: 20px;
-  border-radius: 8px;
-}
-
-div .number {
+.number {
 	background: #151515;
 	color: #fff;
 	height: 30px;
@@ -39,14 +36,9 @@ div .number {
 
 p{
   font-weight: bold;
+  margin: 5px;
 }
 
-p.best{
-	border-style: dotted;
-  border-color: #B5002F;
-  color: #151515;
-  background: #fff;
-}
 p.my{
 	background: #B79A31;
   color: #fff;

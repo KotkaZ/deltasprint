@@ -1,20 +1,24 @@
 <template>
-    <div>
-        <i class="pi pi-user"><strong> Nimi:</strong> {{ participant.firstname + " " + participant.lastname }}</i><br>
-        <i class="pi pi-tag"><strong> Matrikli nr:</strong> {{ participant.studentcode }}</i><br>
-        <i class="pi pi-envelope"><strong> Email:</strong> {{ participant.email }}</i><br>
-        <i class="pi pi-window-maximize"><strong> Ekraani mõõtmed:</strong> {{ screenSize }}</i><br>
-        <Divider />
-        <video ref="camera" autoplay></video>
-    </div>
+    <Card>
+        <template #content> 
+            <i class="pi pi-user"><strong> Nimi:</strong> {{ participant.firstname + " " + participant.lastname }}</i><br>
+            <i class="pi pi-tag"><strong> Matrikli nr:</strong> {{ participant.studentcode }}</i><br>
+            <i class="pi pi-envelope"><strong> Email:</strong> {{ participant.email }}</i><br>
+            <i class="pi pi-window-maximize"><strong> Ekraani mõõtmed:</strong> {{ screenSize }}</i><br>
+            <Divider />
+            <video ref="camera" autoplay></video>
+        </template>
+    </Card>
   
 </template>
 
 <script>
 import Divider from 'primevue/divider';
+import Card from 'primevue/card/sfc';
 export default {
     name: "UserInfo",
     components: {
+        Card,
         Divider
     },
     props: ["participant"],
@@ -48,18 +52,14 @@ export default {
 </script>
 
 <style scoped>
-p {
-    color: black;
-}
-
-div {
-    background: #f4f7f8;
-    padding: 20px;
-    border-radius: 8px;
-}
-
 video {
     width: 100%;
     height: auto;
+}
+
+@media only screen and (max-width: 992px) {
+  video {
+    max-width: 350px;
+  }
 }
 </style>
