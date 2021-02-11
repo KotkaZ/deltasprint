@@ -2,7 +2,7 @@
   <Card>
     <template #title>Areng</template>
     <template #content class="p-fluid"> 
-      <p class="number" v-for="nr in numberOfTasks" v-badge="bestProgress[nr-1] ? bestProgress[nr-1].total : null"
+      <p class="number" v-for="nr in numberOfTasks" v-badge="bestProgress[nr-1] ? (bestProgress[nr-1].total > 99 ? '99+' : bestProgress[nr-1].total) : null"
        :key="nr" :class="{ my: myProgress == nr}">{{nr}}</p>      
     </template>
   </Card>
