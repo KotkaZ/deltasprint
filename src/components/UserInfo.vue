@@ -32,6 +32,11 @@ export default {
         });
     }
     },
+    data(){
+        return { 
+            stream: null
+        }
+    },
     computed: {
         screenSize : () => `${screen.width} x ${screen.height}`
     },
@@ -42,13 +47,17 @@ export default {
                 video: true
             });
 
-            const stream = await navigator.mediaDevices.getUserMedia(constraints)
-            this.$refs.camera.srcObject = stream;
+            this.stream = await navigator.mediaDevices.getUserMedia(constraints)
+            this.$refs.camera.srcObject = this.stream;
         }
         catch(error){
             this.toast(new Error("Ei õnnestunud tuvastada kaamerapilti!"))
         }
-        
+    },
+    unmounted: function(){
+        if(this.stream) this.stream.getTracks().forEach(function(track) {
+            track.stop();
+        });
     }
 
 }
