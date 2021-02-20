@@ -94,7 +94,7 @@
 
                 <Divider />
 
-                <p>Mis tehnilisi probleeme teil esines või mis jäi arusaamatuks?</p>
+                <p>Milliseid tehnilisi probleeme teil esines või mis jäi arusaamatuks?</p>
                 <Textarea v-model="ui.difficulties" />
                 <br>
 
@@ -114,7 +114,7 @@
                 </template>
                 <div class="p-field-checkbox">
                     <Checkbox id="binary" v-model="event.agreement" :binary="true" />
-                    <label for="binary">Annan nõusoleku, et minu tagasisidet võib kasutada arendustöös, reklaamiks ja mujal. Tagasiside on anonüümne. </label>
+                    <label for="binary">Annan nõusoleku, et minu tagasisidet võib kasutada arendustöös ja reklaamilistel eesmärkidel. Korraldaja kohustus on tagada anonüümne tagasiside.</label>
                 </div>
                 <Button class="submit" @click="submit" :disabled="!event.agreement" label="Esita tagasiside"/>
 

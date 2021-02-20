@@ -113,7 +113,7 @@ export default {
 	},
     data: function() {
         return {
-			studyfields: ["Infromaatika", "Matemaatika", "Arvutitehnika", "Matemaatiline statistika", "Muu"],
+			studyfields: ["Informaatika", "Matemaatika", "Arvutitehnika", "Matemaatiline statistika", "Muu"],
 			participant: {
 				firstname: undefined,
 				lastname: undefined,

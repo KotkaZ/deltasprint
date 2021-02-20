@@ -7,7 +7,7 @@
 
       <template #content>
         <ol>
-          <li>Võistluse eesmärk on tunnustada parimaid noori loogikuid, kes on kiired ja täpsed ülessanete lahendamisel.</li>
+          <li>Võistluse eesmärk on tunnustada parimaid noori loogikuid, kes on kiired ja täpsed ülessannete lahendamisel.</li>
 
           <li>Võistlus kuulutatakse välja <a class="pi pi-facebook" href="https://www.facebook.com/MITS.ATI" target="_blank">MATEMAATIKA-INFORMAATIKA TUDENGISELTS MTÜ</a> Facebooki kodulehel </li>
 
@@ -23,7 +23,7 @@
 
           <li>Võistlusel algab ajavõtt kõikidel osalejatel samaaegselt. Ülesandeid saab lahendada kuni 6 tundi, millal ligipääs suletakse.</li>
 
-          <li>Ülesanded on järgenvatest kategooriatest: matemaatika, programmeermine, algoritmid, loogika, tõenäosusteooria, krüptograafia, varia.</li>
+          <li>Ülesanded on järgnevatest kategooriatest: matemaatika, programmeerimine, algoritmid, loogika, tõenäosusteooria, krüptograafia, varia.</li>
 
           <li>Lahenduskäik peab olema vormistatud eesti keeles.</li>
 
@@ -31,7 +31,7 @@
             Lahenduse KOHUSTUSLIKUKS osaks on materjalid, mille korrektsuse eest vastutab võistleja ise.
             <ol>
               <li>Materjalide osaks on ekraanisalvestus, mis on teostatud kogu võistluse vältel. Salvestus peab hõlmama kõiki kasutusel olevaid ekraane.
-                Kohustuslik osa on veebikaamera pilt, mille tuge pakub lahenduskeskkond. Soovitatav tarkvara on  <a class="pi pi-globe" href="https://obsproject.com/">OBS</a>. Heli pole nõutnud.
+                Kohustuslik osa on veebikaamera pilt, mille tuge pakub lahenduskeskkond. Soovitatav tarkvara on  <a class="pi pi-globe" href="https://obsproject.com/">OBS</a>. Heli pole nõutud.
               </li>
               <li>
                 Materjalide alla loetakse kõik failid, mis on suuremad kui 3MB. Lisaks on lubatud lahendada ülesandeid paberil. Sellisel juhul peab
@@ -56,7 +56,7 @@
           <li>Lahendusi kontrollib MATEMAATIKA-INFORMAATIKA TUDENGISELTS MTÜ Akadeemilisest töögrupist moodustatud komisjon. Vastuse juures kontrollitakse
           lahenduskäiku, välismaterjalide kasutust ja üldist reeglitele vastavust.</li>
 
-          <li>Kõikide võitjatega võetakse ühendust e-maili teel. Andmete õiguse eest vastutab võistleja ise, hilisemad muudatused ei ole aktspeteeritud.</li>
+          <li>Kõikide võitjatega võetakse ühendust e-maili teel. Andmete õiguse eest vastutab võistleja ise, hilisemad muudatused ei ole aktsepteeritud.</li>
 
           <li>Komisjon ei ole kohustatud oma otsust põhjendama ning see ei kuulu edasikaebamisele.
           Komisjonil on õigus jätta auhinnad välja andmata, kui ei ole kvalifitseeruvaid lahendusi või esineb keskkonnaga seotud tehnilisi probleeme.</li>

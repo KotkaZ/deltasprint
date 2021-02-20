@@ -29,7 +29,7 @@
           <Column field="comments" header="Märkmed" :sortable="true"/>
 
           <template #footer>
-            Kokku on lõpetas võistluse {{getResults ? getResults.length : 0 }} tudengit.
+            Kokku lõpetas võistluse {{getResults ? getResults.length : 0 }} tudengit.
           </template>
         </DataTable>
       </template>

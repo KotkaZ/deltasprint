@@ -98,7 +98,7 @@ export default {
 			});
 		},
 		submitAnswer: async function () {	
-			if (!this.description && !this.file) this.toast('Lahenduskäik on puudu. Lisage see tektsi või failikujul.');
+			if (!this.description && !this.file) this.toast('Lahenduskäik on puudu. Lisage see teksti- või failikujul.');
 			else if (!this.answer) this.toast('Vastus on puudu.');
 			else{
 				let formData = new FormData();
