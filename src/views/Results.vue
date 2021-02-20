@@ -1,33 +1,38 @@
 <template>
   <div class="p-d-flex p-jc-center">
     <Card class="p-col-12 p-md-8 p-shadow-12">
+      <template #title>
+        Võistluste tulemused
+      </template>
 
-      <DataTable :value="getFormatedResults" removableSort class="p-datatable-sm p-datatable-striped" ref="dt" :autoLayout="true"
-      v-model:filters="filters">
-        <template #header>
-          <div class="p-d-flex p-jc-between">
-            <h2 class="p-m-0">Võistluste tulemused</h2>
-            <div>
-              <Dropdown v-model="selectedCompetition"  @change="onChange()" :options="getCompetitions" optionLabel="name" placeholder="Vali üritus" class="p-mr-2" />
-              <span class="p-input-icon-left">
-                <i class="pi pi-search" />
-                <InputText v-model="filters.global.value" placeholder="Otsi viidet" class="p-mr-2"/>
-              </span>
-              <Button icon="pi pi-external-link" label="Laadi alla" @click="exportCSV($event)" />
+      <template #content>
+        <DataTable :value="getFormatedResults" removableSort class="p-datatable-sm p-datatable-striped" ref="dt" :autoLayout="true"
+        v-model:filters="filters">
+          
+          <template #header>
+            <div class="p-d-flex p-jc-end">
+              <div>
+                <Dropdown v-model="selectedCompetition"  @change="onChange()" :options="getCompetitions" optionLabel="name" placeholder="Vali üritus" class="p-mr-2" />
+                <span class="p-input-icon-left">
+                  <i class="pi pi-search" />
+                  <InputText v-model="filters.global.value" placeholder="Otsi viidet" class="p-mr-2"/>
+                </span>
+                <Button icon="pi pi-external-link" label="Laadi alla" @click="exportCSV($event)" />
+              </div>
             </div>
-          </div>
-        </template>
+          </template>
 
-        <Column field="place" header="Koht" :sortable="true"/>
-        <Column field="firstname" header="Eesnimi" :sortable="true"/>
-        <Column field="lastname" header="Perekonnanimi" :sortable="true"/>
-        <Column field="finalTime" header="Lõpuaeg" :sortable="true"/>
-        <Column field="comments" header="Märkmed" :sortable="true"/>
+          <Column field="place" header="Koht" :sortable="true"/>
+          <Column field="firstname" header="Eesnimi" :sortable="true"/>
+          <Column field="lastname" header="Perekonnanimi" :sortable="true"/>
+          <Column field="finalTime" header="Lõpuaeg" :sortable="true"/>
+          <Column field="comments" header="Märkmed" :sortable="true"/>
 
-        <template #footer>
-          Kokku on lõpetas võistluse {{getResults ? getResults.length : 0 }} tudengit.
-        </template>
-      </DataTable>
+          <template #footer>
+            Kokku on lõpetas võistluse {{getResults ? getResults.length : 0 }} tudengit.
+          </template>
+        </DataTable>
+      </template>
     </Card>
   </div>
 </template>
@@ -40,6 +45,7 @@ import Dropdown from 'primevue/dropdown/sfc';
 import Column from 'primevue/column/sfc';
 import Button from 'primevue/button/sfc';
 import InputText from 'primevue/inputtext/sfc';
+import Card from 'primevue/card/sfc';
 import {FilterMatchMode} from 'primevue/api';
 
 export default {
@@ -47,6 +53,7 @@ export default {
   components: {
     DataTable,
     Dropdown,
+    Card,
     Column,
     Button,
     InputText
@@ -61,7 +68,7 @@ export default {
     ...mapGetters(['getResults', 'getCompetitions']),
     getFormatedResults: function(){
       const results = this.getResults;
-      if(!results.length) return null;
+      if(!results.length || !this.selectedCompetition) return null;
       results.sort((a,b) => new Date(a.endtime) - new Date(b.endtime));
       let place = 1;
       results.forEach((el) => {
@@ -102,6 +109,9 @@ export default {
       console.error(error);
       this.toast(error);
     }
+  },
+  unmounted: function() {
+    this.selectedCompetition = null;
   }
 
 }
