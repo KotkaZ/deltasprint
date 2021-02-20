@@ -8,8 +8,8 @@
                 </router-link>
             </li>
             <li class="items">
-                <router-link to="/about">
-                    <p>Juhised</p>
+                <router-link to="/statute">
+                    <p>Statuut</p>
                 </router-link>
             </li>
 
