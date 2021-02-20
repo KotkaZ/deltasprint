@@ -1,4 +1,12 @@
-# deltasprint
+# DeltaSprint
+
+This is a front-end application of DeltaSprint project. The main function is to provide
+competetive environment, where participants can't proceed with wrong solutions.
+In addition, other's progress can be seen while solving yourself.
+
+## Techinal
+This web-app is mainly built on Vue 3 framework.
+UI is made with PrimeVue libary. 
 
 ## Project setup
 ```
@@ -15,10 +23,3 @@ npm run serve
 npm run build
 ```
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
