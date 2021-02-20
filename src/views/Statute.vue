@@ -21,6 +21,10 @@
 
           <li>Võistlus viiakse läbi <a class="pi pi-globe" href="https://www.deltasprint.ee" target="_blank">DELTASPRINT</a> keskkonnas. Osalejatel on TUNGIV soovitus eelnevalt platvormiga tutvuda osaledes mõnel avalikul katsetusel.</li>
 
+          <li>Võistlusel algab ajavõtt kõikidel osalejatel samaaegselt. Ülesandeid saab lahendada kuni 6 tundi, millal ligipääs suletakse.</li>
+
+          <li>Ülesanded on järgenvatest kategooriatest: matemaatika, programmeermine, algoritmid, loogika, tõenäosusteooria, krüptograafia, varia.</li>
+
           <li>Lahenduskäik peab olema vormistatud eesti keeles.</li>
 
           <li>
