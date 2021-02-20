@@ -1,125 +1,127 @@
 <template>
-    <div class="p-fluid p-grid p-jc-center p-nogutter">
-        <Accordion :activeIndex="0" class="p-col-10">
-            <AccordionTab>
-                <template #header>
-                    <i class="pi pi-info-circle p-mr-1"></i>
-                    <span>Üldinfo</span>
-                </template>
+    <div class="p-d-flex p-jc-center">
+        <Card class="p-col-12 p-md-8 p-shadow-12">
+            <template #title>
+                Tagasisidevorm
+            </template>
+            <template #content>
+                <Accordion :activeIndex="0" :multiple="true">
+                    <AccordionTab>
+                        <template #header>
+                            <i class="pi pi-info-circle p-mr-1"></i>
+                            <span>Üldinfo</span>
+                        </template>
 
-                <h3>Aitäh osalemast!</h3>
-                <p>
-                    Selleks, et saaksime aimu ürituse formaadist, ülesannete keerukusest ja keskkonna sobivusest, koostasime väikese tagasiside vormi.
-                    Loodame, et leiate mõne minuti aega, et see ära täita. See ei ole kohustuslik ja ei mõjuta mingil määral teie lõpptulemust.
-                    Vormi täitmine võtab aega 5 kuni 10 minutit ning on anonüümne. Sellelt lehelt lahkudes enam tagasisidet esitada ei saa.
-                </p>
-                <br>
-                <p>
-                    Tuletame siinkohal meelde, et kõik salvestused tuleb hoida alles 14 päeva alates tänasest. Võitjatega võetakse ühendust emaili
-                    teel ning palutakse edastada salvestuste link. Edasi toimub parimate lahenduste kontrollimine ja võitjate kinnitamine. 
-                    Esialgsed tulemused on nähtaval juba praegu, kuid lõpptulemus võib muutuda vastavalt võistluse statuudile. Parimad osalejad selguvad
-                    14 päeva jooksul ja need kajastakse DeltaSprindi avalehel ning Mitsi Facebookis.
-                </p>
+                        <h3>Aitäh osalemast!</h3>
+                        <p>
+                            Selleks, et saaksime aimu ürituse formaadist, ülesannete keerukusest ja keskkonna sobivusest, koostasime väikese tagasiside vormi.
+                            Loodame, et leiate mõne minuti aega, et see ära täita. See ei ole kohustuslik ja ei mõjuta mingil määral teie lõpptulemust.
+                            Vormi täitmine võtab aega 5 kuni 10 minutit ning on anonüümne. Sellelt lehelt lahkudes enam tagasisidet esitada ei saa.
+                        </p>
+                        <br>
+                        <p>
+                            Tuletame siinkohal meelde, et kõik salvestused tuleb hoida alles 14 päeva alates tänasest. Võitjatega võetakse ühendust emaili
+                            teel ning palutakse edastada salvestuste link. Edasi toimub parimate lahenduste kontrollimine ja võitjate kinnitamine. 
+                            Esialgsed tulemused on nähtaval juba praegu, kuid lõpptulemus võib muutuda vastavalt võistluse statuudile. Parimad osalejad selguvad
+                            14 päeva jooksul ja need kajastakse DeltaSprindi avalehel ning Mitsi Facebookis.
+                        </p>
 
-            </AccordionTab>
+                    </AccordionTab>
 
-            <AccordionTab>
-                <template #header>
-                    <i class="pi pi-globe p-mr-1"></i>
-                    <span> Üritus</span>
-                </template>
+                    <AccordionTab>
+                        <template #header>
+                            <i class="pi pi-globe p-mr-1"></i>
+                            <span> Üritus</span>
+                        </template>
 
-                <p>Kuidas on teie üldine rahulolu korraldusega?</p>
-                <Rating v-model="event.overallRating" />
-                <br>
+                        <p>Kuidas on teie üldine rahulolu korraldusega?</p>
+                        <Rating v-model="event.overallRating" />
+                        <br>
 
-                <p>Kui tõenäoline on, et osaleksite veel DeltaSprindil või soovitaksite seda sõbrale?</p>
-                <Rating v-model="event.recommendRating" />
-                <br>
+                        <p>Kui tõenäoline on, et osaleksite veel DeltaSprindil või soovitaksite seda sõbrale?</p>
+                        <Rating v-model="event.recommendRating" />
+                        <br>
 
-                <p>Kuidas jäite rahule ürituse formaadiga?</p>
-                <Rating v-model="event.formatRating" />
+                        <p>Kuidas jäite rahule ürituse formaadiga?</p>
+                        <Rating v-model="event.formatRating" />
 
-                <Divider />
+                        <Divider />
 
-                <p>Kust te antud üritusest kuulsite?</p>
-                <Textarea v-model="event.fromwhere" />
-                <br>
+                        <p>Kust te antud üritusest kuulsite?</p>
+                        <Textarea v-model="event.fromwhere" />
+                        <br>
 
-                <p>Mis läks kehvasti ja mida saaksime parandada?</p>
-                <Textarea v-model="event.toChange" />
+                        <p>Mis läks kehvasti ja mida saaksime parandada?</p>
+                        <Textarea v-model="event.toChange" />
 
 
 
-            </AccordionTab>
-            <AccordionTab>
-                <template #header>
-                    <i class="pi pi-chart-bar p-mr-1"></i>
-                    <span> Ülesanded</span>
-                </template>
+                    </AccordionTab>
+                    <AccordionTab>
+                        <template #header>
+                            <i class="pi pi-chart-bar p-mr-1"></i>
+                            <span> Ülesanded</span>
+                        </template>
 
-                <p>Kuidas vastasid ülesanded teie ootustele?</p>
-                <Rating v-model="tasks.opinionRating" />
-                <br>
+                        <p>Kuidas vastasid ülesanded teie ootustele?</p>
+                        <Rating v-model="tasks.opinionRating" />
+                        <br>
 
-                <p>Kuidas hindate ülesannete variatsiooni?</p>
-                <Rating v-model="tasks.varianceRating" />
+                        <p>Kuidas hindate ülesannete variatsiooni?</p>
+                        <Rating v-model="tasks.varianceRating" />
 
-                <Divider />
+                        <Divider />
 
-                <p>Milliseid tööriistu/vahendeid te ülesannete lahendamisel kasutasite?</p>
-                <Textarea v-model="tasks.toolsUsed" />
-                <br>
+                        <p>Milliseid tööriistu/vahendeid te ülesannete lahendamisel kasutasite?</p>
+                        <Textarea v-model="tasks.toolsUsed" />
+                        <br>
 
-                <p>Milliseid ülesanded valmistasid raskusi ja miks?</p>
-                <Textarea v-model="tasks.hardTasks" />
-                <br>
+                        <p>Milliseid ülesanded valmistasid raskusi ja miks?</p>
+                        <Textarea v-model="tasks.hardTasks" />
+                        <br>
 
-                <p>Milliseid ülesandeid sooviksite tulevikus näha?</p>
-                <Textarea v-model="tasks.futureTasks" />
+                        <p>Milliseid ülesandeid sooviksite tulevikus näha?</p>
+                        <Textarea v-model="tasks.futureTasks" />
 
-            </AccordionTab>
-            <AccordionTab>
-                <template #header>
-                    <i class="pi pi-th-large p-mr-1"></i>
-                    <span> Kasutajaliides</span>
-                </template>
+                    </AccordionTab>
+                    <AccordionTab>
+                        <template #header>
+                            <i class="pi pi-th-large p-mr-1"></i>
+                            <span> Kasutajaliides</span>
+                        </template>
 
-                <p>Kuidas jäite rahule keskkonna visuaalse poolega?</p>
-                <Rating v-model="ui.visualRating" />
-                <br>
+                        <p>Kuidas jäite rahule keskkonna visuaalse poolega?</p>
+                        <Rating v-model="ui.visualRating" />
+                        <br>
 
-                <p>Kui lihtne oli keskkonnas navigeerida? (5 - väga lihtne) </p>
-                <Rating v-model="ui.navigationRating" />
+                        <p>Kui lihtne oli keskkonnas navigeerida? (5 - väga lihtne) </p>
+                        <Rating v-model="ui.navigationRating" />
 
-                <Divider />
+                        <Divider />
 
-                <p>Milliseid tehnilisi probleeme teil esines või mis jäi arusaamatuks?</p>
-                <Textarea v-model="ui.difficulties" />
-                <br>
+                        <p>Milliseid tehnilisi probleeme teil esines või mis jäi arusaamatuks?</p>
+                        <Textarea v-model="ui.difficulties" />
+                        <br>
 
-                <p>Mida saaks täiendada ja mis võimalusi juurde tuua?</p>
-                <Textarea v-model="ui.newFeatures" />
-                <br>
+                        <p>Mida saaks täiendada ja mis võimalusi juurde tuua?</p>
+                        <Textarea v-model="ui.newFeatures" />
+                        <br>
 
-                <p>Kas eelistaksite antud keskkonda mõnele muule testikeskkonnale, näiteks Moodle? Kui ei, siis miks?</p>
-                <Textarea v-model="ui.preferences" />
+                        <p>Kas eelistaksite antud keskkonda mõnele muule testikeskkonnale, näiteks Moodle? Kui ei, siis miks?</p>
+                        <Textarea v-model="ui.preferences" />
 
-            </AccordionTab>
+                    </AccordionTab>
+                </Accordion>
+            </template>
 
-            <AccordionTab>
-                <template #header>
-                    <i class="pi pi-forward p-mr-1"></i>
-                    <span>Esitus</span>
-                </template>
+            <template #footer>
                 <div class="p-field-checkbox">
                     <Checkbox id="binary" v-model="event.agreement" :binary="true" />
                     <label for="binary">Annan nõusoleku, et minu tagasisidet võib kasutada arendustöös ja reklaamilistel eesmärkidel. Korraldaja kohustus on tagada anonüümne tagasiside.</label>
                 </div>
-                <Button class="submit" @click="submit" :disabled="!event.agreement" label="Esita tagasiside"/>
-
-            </AccordionTab>
-        </Accordion>
+                <Button class="submit" @click="submit" :disabled="!event.agreement" icon="pi pi-send" label="Esita tagasiside"/>
+            </template>
+        </Card>
     </div>
 </template>
 
@@ -132,6 +134,7 @@ import Rating from 'primevue/rating';
 import Textarea from 'primevue/textarea';
 import Divider from 'primevue/divider';
 import Button from 'primevue/button';
+import Card from 'primevue/card';
 
 export default {
     name: "Feedback",
@@ -142,7 +145,8 @@ export default {
         Checkbox,
         Rating,
         Textarea,
-        Divider
+        Divider,
+        Card
     },
     data(){
         return{
