@@ -29,7 +29,7 @@
 						<div class="p-col-12 p-md-4">
 							<div class="p-grid">
 								<div class="p-col-12">
-									<FileUpload class="upload" :maxFileSize="3000000" :fileLimit="1" :auto="true"
+									<FileUpload class="upload" :maxFileSize="3000000" :fileLimit="1" :auto="true" :disabled="file !== ''"
 										chooseLabel="Vali fail" :customUpload="true" @uploader="fileHandler" mode="basic" ref="files">
 									</FileUpload>
 									<Button @click="clearFile()" :disabled="!file" icon="pi pi-times" />
@@ -61,7 +61,8 @@ import ProgressBar from 'primevue/progressbar/sfc';
 import Card from 'primevue/card/sfc';
 import BlockUI from 'primevue/blockui';
 import ProgressSpinner from 'primevue/progressspinner';
-
+import sucessSound from '../assets/Sucsess.wav'
+import errorSound from '../assets/Error.wav'
 
 export default {
 	name: "ExerciseSolution",
@@ -111,6 +112,7 @@ export default {
 					this.blockedPanel = true;
 					await this.submitResult(formData);
 					this.$toast.add({severity:'success', summary: 'Teade', detail:'Lahendus edukalt esitatud', life: 3000});
+					await new Audio(sucessSound).play();
 
 					if(this.question.number === this.question.total){
 						this.$toast.add({severity:'success', summary: 'Teade', detail:'Võistlus edukalt lõpetatud!', life: 3000});
@@ -128,6 +130,7 @@ export default {
 					let message = error.message;
 					if(error.response && error.response.status == 409) message = "Vastus on vale!"
 					this.toast(message);
+					await new Audio(errorSound).play();
 				}
 				finally{
 					this.setUploadPercentage(0);
