@@ -68,10 +68,10 @@
           <strong>Kontakt:</strong> Karl Rapur, DeltaSprint korraldaja, karl.rapur@ut.ee, 55 84 366 <br>
           Kerdo Kurs, Akadeemilise töögrupi esimees, kerdo.kurs@ut.ee <br><br>
 
-          <strong>Toetajad:</strong>
+          <strong>Toetajad:</strong><br><br>
           <div class="p-grid p-jc-center">
-            <img src="../assets/ati-sinine.svg" alt="ATI logo" class="p-col-12 p-md-6">
-            <img src="../assets/mat-stat-sinine.svg" alt="MSI logo" class="p-col-12 p-md-6">
+            <a href="https://www.cs.ut.ee/" target="_blank" class="p-col-12 p-md-6"><img src="../assets/ati-sinine.svg" alt="ATI logo"></a>
+            <a href="https://www.math.ut.ee/" target="_blank" class="p-col-12 p-md-6"><img src="../assets/mat-stat-sinine.svg" alt="MSI logo"></a>
           </div>
         </template>
     </Card>
@@ -106,7 +106,11 @@ li:before {
   font-weight: bold;
 }
 img{ 
-  object-fit: contain;
+  width: 100%;
+  height: auto;
 }
 
+a{
+  text-decoration: none;
+}
 </style>
