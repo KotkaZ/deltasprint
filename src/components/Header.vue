@@ -2,24 +2,24 @@
     <nav>
 
         <ul>
-            <li class="logo">
+            <li class="logo" @click="toggleMenu">
                 <router-link to="/">
                     <p>Delta<span id="bold">Sprint</span></p>
                 </router-link>
             </li>
-            <li class="items">
+            <li class="items" @click="toggleMenu">
                 <router-link to="/statute">
                     <p>Statuut</p>
                 </router-link>
             </li>
 
-            <li class="items">
+            <li class="items" @click="toggleMenu">
                 <router-link to="/competition">
                     <p>Võistlema</p>
                 </router-link>
             </li>
 
-            <li class="items">
+            <li class="items" @click="toggleMenu">
                 <router-link to="/results">
                     <p>Tulemused</p>
                 </router-link>
@@ -46,7 +46,6 @@ export default {
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css?family=Rubik:400,500,600,700&display=swap');
 *{
     margin: 0;
     padding: 0;
