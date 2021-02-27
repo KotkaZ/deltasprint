@@ -1,10 +1,10 @@
 <template>
     <Card>
         <template #content> 
-            <i class="pi pi-user"><strong> Nimi:</strong> {{ participant.firstname + " " + participant.lastname }}</i><br>
-            <i class="pi pi-tag"><strong> Matrikli nr:</strong> {{ participant.studentcode }}</i><br>
-            <i class="pi pi-envelope"><strong> Email:</strong> {{ participant.email }}</i><br>
-            <i class="pi pi-window-maximize"><strong> Ekraani mõõtmed:</strong> {{ screenSize }}</i><br>
+            <i class="pi pi-user"><p><strong> Nimi:</strong> {{ participant.firstname + " " + participant.lastname }}</p></i><br>
+            <i class="pi pi-tag"><p><strong> Matrikli nr:</strong> {{ participant.studentcode }}</p></i><br>
+            <i class="pi pi-envelope"><p><strong> Email:</strong> {{ participant.email }}</p></i><br>
+            <i class="pi pi-window-maximize"><p><strong> Ekraani mõõtmed:</strong> {{ screenSize }}</p></i><br>
             <Divider />
             <video ref="camera" autoplay></video>
         </template>
@@ -67,6 +67,10 @@ export default {
 video {
     width: 100%;
     height: auto;
+}
+p {
+    display: inline;
+    font-family: 'Rubik';
 }
 
 @media only screen and (max-width: 992px) {
