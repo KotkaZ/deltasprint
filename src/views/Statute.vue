@@ -70,8 +70,8 @@
 
           <strong>Toetajad:</strong>
           <div class="p-grid p-jc-center">
-            <img src="../assets/ati-sinine.png" alt="ATI logo" class="p-col-12 p-md-6">
-            <img src="../assets/mat-stat-sinine.png" alt="MSI logo" class="p-col-12 p-md-6">
+            <img src="../assets/ati-sinine.svg" alt="ATI logo" class="p-col-12 p-md-6">
+            <img src="../assets/mat-stat-sinine.svg" alt="MSI logo" class="p-col-12 p-md-6">
           </div>
         </template>
     </Card>
