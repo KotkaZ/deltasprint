@@ -40,7 +40,7 @@ p{
 }
 
 p.my{
-	background: #B79A31;
+	background: #B5002F;
   color: #fff;
 }
 </style>

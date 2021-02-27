@@ -9,7 +9,7 @@
 <script>
 import { mapActions } from 'vuex'
 import Header from './components/Header.vue'
-import 'primevue/resources/themes/saga-blue/theme.css'        //theme
+import '../res/theme.css'        //theme
 import 'primevue/resources/primevue.min.css'                  //core css
 import 'primeicons/primeicons.css'                            //icons
 import 'primeflex/primeflex.css'
@@ -33,6 +33,8 @@ export default {
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css?family=Rubik:400,500,600,700&display=swap');
+
 * {
   /*font-family: 'Lora';*/
   outline: none;
@@ -41,8 +43,10 @@ export default {
 
 
 body {
-  /*background-image: url('assets/background.jpg');*/
-  color: #000000;
+  background-image: url('assets/background/Sügisvärvid_ja_Delta.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
 
 
