@@ -22,7 +22,7 @@ const routes = [{
         name: 'Registration',
         component: Register,
         beforeEnter: (to, from, next) => {
-            if (store.getters.getAccessToken) next('Competition');
+            if (store.getters.getAccessToken) next('/competition');
             else next();
         }
 
@@ -33,7 +33,7 @@ const routes = [{
         component: Competition,
         beforeEnter: (to, from, next) => {
             if (store.getters.getAccessToken) next();
-            else next('Register');
+            else next('/register');
         }
     },
     {

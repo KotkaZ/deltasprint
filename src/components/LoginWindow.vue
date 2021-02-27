@@ -174,7 +174,7 @@ export default {
 					throw new Error("Vigane valideering!");
 				}
 				await this.signinParticipant(this.participant);
-				this.$router.push('Competition');
+				this.$router.push('/competition');
 			}
 			catch(error) {
 				console.error(error);
