@@ -1,8 +1,11 @@
 <template>
-  <div>
-    <h1 id="logo">Delta<span id="bold">Sprint</span></h1>
-    <br>
-    <p ref="quote"></p>
+  <div class="p-grid p-nogutter p-jc-center">
+      <div class="p-col-12 p-md-6 p-lg-4 side left-side">
+        <h1 id="logo">Delta<br><span id="bold">Sprint</span></h1>
+      </div>
+      <div class="p-col-12 p-md-5 p-lg-5 side right-side">
+        <p ref="quote"></p>
+      </div>
   </div>
 </template>
 
@@ -55,11 +58,6 @@ export default {
 </script>
 
 <style scoped>
-div{
-    width: 100%;
-    text-align: center;
-}
-
 
 h1, p{
     font-family: 'Rubik';
@@ -79,6 +77,27 @@ h1, p{
     font-weight: 900;
 }
 
+div .side {
+    padding: 10px;
+}
+
+div .left-side{
+    text-align: right;
+    padding: 10px;
+    border-right: 3px solid #fff;
+}
+div .right-side{
+    text-align: left;
+    border-radius: 3px;
+    background-color: #1B1B1F80;
+    line-height: 1.5;
+}
+
+
+h1 {
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+}
 
 @keyframes caret {
   50% {
