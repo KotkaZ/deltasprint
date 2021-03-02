@@ -1,9 +1,14 @@
 <template>
-  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lora" />
+  <picture id="overlay">
+    <source srcset="./assets/background/Sügisvärvid_ja_Delta.webp" type="image/webp">
+    <source srcset="./assets/background/Sügisvärvid_ja_Delta.jpg" type="image/jpeg"> 
+    <img id="background" src="./assets/background/Sügisvärvid_ja_Delta.jpg" alt="Delta building">
+  </picture>
   <ConfirmDialog/>
   <Toast/>
   <Header></Header>
-  <router-view/>
+  <router-view id="view"/>
+
 </template>
 
 <script>
@@ -28,6 +33,7 @@ export default {
   },
   created(){
     this.setupHeaders();
+
   }
 }
 </script>
@@ -36,18 +42,34 @@ export default {
 @import url('https://fonts.googleapis.com/css?family=Rubik:400,500,600,700&display=swap');
 
 * {
-  /*font-family: 'Lora';*/
   outline: none;
   margin: 0;
 }
 
 
-body {
-  background-image: url('assets/background/Sügisvärvid_ja_Delta.jpg');
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
+#background{ 
+  width: 105%;
+  height: 105%;
+  margin: -10px;
+  object-fit: cover;
+
+
+  -webkit-filter: blur(3px);
+  -moz-filter: blur(3px);
+  -o-filter: blur(3px);
+  -ms-filter: blur(3px);
+  filter: blur(3px);
 }
+
+#overlay {
+  z-index: -999;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+
 
 
 </style>

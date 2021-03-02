@@ -1,12 +1,12 @@
 <template>
   <div>
-    <div class="container p-grid p-ai-center p-jc-center vertical-container">
+    <div class="container p-grid p-ai-center p-jc-center vertical-container p-nogutter">
       <HomeWelcome class="p-col"/>
     </div>
-    <div class="container p-grid p-ai-center p-jc-center vertical-container">
+    <div class="container p-grid p-ai-center p-jc-center vertical-container p-nogutter">
       <HomePlatform class="p-col"/>
     </div>
-    <div class="container p-grid p-ai-center p-jc-center vertical-container">
+    <div class="container p-grid p-ai-center p-jc-center vertical-container p-nogutter">
       <HomeSponsors class="p-col"/>
     </div>
     <Footer id="footer"/>
