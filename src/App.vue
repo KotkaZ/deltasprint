@@ -1,8 +1,15 @@
 <template>
   <picture id="overlay">
-    <source srcset="./assets/background/Sügisvärvid_ja_Delta.webp" type="image/webp">
-    <source srcset="./assets/background/Sügisvärvid_ja_Delta.jpg" type="image/jpeg"> 
-    <img id="background" src="./assets/background/Sügisvärvid_ja_Delta.jpg" alt="Delta building">
+    <source media="(min-width: 4994px)" srcset="./assets/background/backgroundXXL.webp" type="image/webp">
+    <source media="(min-width: 3400px) and (max-width: 4993px)" srcset="./assets/background/backgroundXL.webp" type="image/webp">
+    <source media="(min-width: 1920px) and (max-width: 3399px)" srcset="./assets/background/backgroundL.webp" type="image/webp">
+    <source media="(max-width: 1919px)" srcset="./assets/background/backgroundM.webp" type="image/webp">
+
+    <source media="(min-width: 4994px)" srcset="./assets/background/backgroundXXL.jpg" type="image/jpeg">
+    <source media="(min-width: 3400px) and (max-width: 4993px)" srcset="./assets/background/backgroundXL.jpg" type="image/jpeg"> 
+    <source media="(min-width: 1920px) and (max-width: 3399px)" srcset="./assets/background/backgroundL.jpg" type="image/jpeg"> 
+    <source media="(max-width: 1919px)" srcset="./assets/background/backgroundM.jpg" type="image/jpeg"> 
+    <img id="background" src="./assets/background/backgroundXL.jpg" alt="Delta building">
   </picture>
   <ConfirmDialog/>
   <Toast/>
