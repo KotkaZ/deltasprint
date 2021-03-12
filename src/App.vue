@@ -1,26 +1,32 @@
 <template>
   <picture id="overlay">
+    <div class='tint'></div>
     <source media="(min-width: 4994px)" srcset="./assets/background/backgroundXXL.webp" type="image/webp">
-    <source media="(min-width: 3400px) and (max-width: 4993px)" srcset="./assets/background/backgroundXL.webp" type="image/webp">
-    <source media="(min-width: 1920px) and (max-width: 3399px)" srcset="./assets/background/backgroundL.webp" type="image/webp">
-    <source media="(max-width: 1919px)" srcset="./assets/background/backgroundM.webp" type="image/webp">
+    <source media="(min-width: 3400px) and (max-width: 4993px)" srcset="./assets/background/backgroundXXL.webp" type="image/webp">
+    <source media="(min-width: 1920px) and (max-width: 3399px)" srcset="./assets/background/backgroundXL.webp" type="image/webp">
+    <source media="(max-width: 1919px)" srcset="./assets/background/backgroundL.webp" type="image/webp">
 
     <source media="(min-width: 4994px)" srcset="./assets/background/backgroundXXL.jpg" type="image/jpeg">
-    <source media="(min-width: 3400px) and (max-width: 4993px)" srcset="./assets/background/backgroundXL.jpg" type="image/jpeg"> 
-    <source media="(min-width: 1920px) and (max-width: 3399px)" srcset="./assets/background/backgroundL.jpg" type="image/jpeg"> 
-    <source media="(max-width: 1919px)" srcset="./assets/background/backgroundM.jpg" type="image/jpeg"> 
+    <source media="(min-width: 3400px) and (max-width: 4993px)" srcset="./assets/background/backgroundXXL.jpg" type="image/jpeg"> 
+    <source media="(min-width: 1920px) and (max-width: 3399px)" srcset="./assets/background/backgroundXL.jpg" type="image/jpeg"> 
+    <source media="(max-width: 1919px)" srcset="./assets/background/backgroundL.jpg" type="image/jpeg"> 
     <img id="background" src="./assets/background/backgroundXL.jpg" alt="Delta building">
   </picture>
   <ConfirmDialog/>
   <Toast/>
-  <Header></Header>
-  <router-view id="view"/>
+
+  <div id="main" class="p-d-flex p-flex-column p-jc-between">
+    <Header></Header>
+    <router-view id="view"/>
+    <Footer id="footer"/>
+  </div>
 
 </template>
 
 <script>
 import { mapActions } from 'vuex'
 import Header from './components/Header.vue'
+import Footer from './components/Footer.vue';
 import '../res/theme.css'        //theme
 import 'primevue/resources/primevue.min.css'                  //core css
 import 'primeicons/primeicons.css'                            //icons
@@ -32,6 +38,7 @@ import Toast from 'primevue/toast';
 export default {
   components: {
     Header,
+    Footer,
     ConfirmDialog,
     Toast
   },
@@ -55,17 +62,9 @@ export default {
 
 
 #background{ 
-  width: 105%;
-  height: 105%;
-  margin: -10px;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-
-
-  -webkit-filter: blur(3px);
-  -moz-filter: blur(3px);
-  -o-filter: blur(3px);
-  -ms-filter: blur(3px);
-  filter: blur(3px);
 }
 
 #overlay {
@@ -73,10 +72,23 @@ export default {
   position: fixed;
   width: 100vw;
   height: 100vh;
-  overflow: hidden;
+}
+#overlay:before {
+ content: '';
+ position: absolute;
+ width: 100%;
+ height: 100%;
+ background: -webkit-linear-gradient(45deg, rgba(183,154,49,0.6) 25%, rgba(255,255,255,0.5) 75%);
+ background: linear-gradient(45deg, rgba(183,154,49,0.6) 25%, rgba(255,255,255,0.5) 75%);
 }
 
+#footer {
+  width: 100%;
+}
 
+#main{
+  min-height: 100vh;
+}
 
 
 </style>

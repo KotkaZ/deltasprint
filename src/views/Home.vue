@@ -9,7 +9,6 @@
     <div class="container p-grid p-ai-center p-jc-center vertical-container p-nogutter">
       <HomeSponsors class="p-col"/>
     </div>
-    <Footer id="footer"/>
   </div>
 </template>
 
@@ -17,15 +16,13 @@
 import HomeWelcome from '../components/HomeWelcome.vue';
 import HomePlatform from '../components/HomePlatform.vue';
 import HomeSponsors from '../components/HomeSponsors.vue';
-import Footer from '../components/Footer.vue';
 
 export default {
   name: 'Home',
   components: {
     HomeWelcome,
     HomePlatform,
-    HomeSponsors,
-    Footer
+    HomeSponsors
   }
 }
 </script>
@@ -35,10 +32,6 @@ export default {
   height: calc(100vh - 62px);
   width: 100%;
   vertical-align: middle;
-}
-#footer {
-  bottom: 0px;
-  width: 100%;
 }
 
 </style>
