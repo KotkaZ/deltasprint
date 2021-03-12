@@ -25,7 +25,7 @@
                 </router-link>
             </li>
             <li class="btn" @click="toggleMenu">
-                <a href="#"><p>&#9776;</p></a>
+                <i class="pi pi-bars"></i>
             </li>
         </ul>
 
@@ -49,6 +49,7 @@ export default {
 *{
     margin: 0;
     padding: 0;
+    color: white;
     box-sizing: border-box;
     font-family: 'Rubik';
 }
@@ -123,9 +124,7 @@ nav ul li i{
 nav ul li.btn{
     display: none;
 }
-nav ul li.btn.hide i:before{
-    content: '\f0c9';
-}
+
 @media all and (max-width: 900px){
     nav{
         padding: 5px 30px;
