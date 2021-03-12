@@ -5,10 +5,10 @@
         
       </template>
       <template #title>
-        <div class="p-d-flex p-jc-end">
+        <div class="p-d-flex p-jc-between">
+          <div class="p-card-title">DeltaSprint 2021 kevad - STATUUT</div>
           <Button id="goback" icon="pi pi-times" class="p-button-outlined" @click="$router.push('/')"/>
         </div>
-        DeltaSprint 2021 kevad - STATUUT
       </template>
 
       <template #content>

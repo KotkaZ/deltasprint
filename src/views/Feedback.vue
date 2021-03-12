@@ -119,7 +119,7 @@
                     <Checkbox id="binary" v-model="event.agreement" :binary="true" />
                     <label for="binary">Annan nõusoleku, et minu tagasisidet võib kasutada arendustöös ja reklaamilistel eesmärkidel. Korraldaja kohustus on tagada anonüümne tagasiside.</label>
                 </div>
-                <Button class="submit" @click="submit" :disabled="!event.agreement" icon="pi pi-send" label="Esita tagasiside"/>
+                <Button @click="submit" :disabled="!event.agreement" icon="pi pi-send" label="Esita tagasiside"/>
             </template>
         </Card>
     </div>
@@ -193,7 +193,4 @@ export default {
 </script>
 
 <style scoped>
-.submit { 
-    text-align: center;
-}
 </style>

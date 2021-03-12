@@ -2,10 +2,10 @@
   <div class="p-grid nested-grid p-nogutter">
     <div class="p-col-12 p-lg-3">
       <div class="p-grid p-nogutter">
-        <div class="layout p-col-12">
+        <div class="p-col-12 p-px-md-3 p-p-0">
           <ProgressBar :numberOfTasks="getQuestion.total" :myProgress="getQuestion.number" :bestProgress="getProgress"></ProgressBar>
         </div>
-        <div class="layout p-col-12">
+        <div class="p-col-12 p-px-md-3 p-pt-md-3 p-p-0">
           <UserInfo :participant="getParticipant"></UserInfo>
         </div>
       </div>
@@ -13,10 +13,10 @@
 
     <div class="p-col-12 p-lg-9">
       <div class="p-grid p-nogutter">
-        <div class="layout p-col-12">
+        <div class="p-col-12 p-px-md-3 p-pt-md-3 p-pt-lg-0 p-pl-lg-0 p-p-0">
           <ExerciseDesc :task="getQuestion"></ExerciseDesc>
         </div>
-        <div class="layout p-col-12">
+        <div class="p-col-12 p-px-md-3 p-pt-md-3 p-pl-lg-0 p-p-0">
           <ExcerciseStn :competition="getParticipant.competition" :question="getQuestion"></ExcerciseStn>
         </div>
       </div>
@@ -79,8 +79,4 @@ export default {
 </script>
 
 <style scoped>
-.layout{
-  padding: 8px;
-}
-
 </style>

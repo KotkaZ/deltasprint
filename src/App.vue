@@ -15,10 +15,10 @@
   <ConfirmDialog/>
   <Toast/>
 
-  <div id="main" class="p-d-flex p-flex-column p-jc-between">
+  <div id="main" class="p-d-flex p-flex-column">
     <Header></Header>
-    <router-view id="view"/>
-    <Footer id="footer"/>
+    <router-view class="p-my-md-3"/>
+    <Footer class="p-mt-auto"/>
   </div>
 
 </template>
@@ -82,9 +82,6 @@ export default {
  background: linear-gradient(45deg, rgba(183,154,49,0.6) 25%, rgba(255,255,255,0.5) 75%);
 }
 
-#footer {
-  width: 100%;
-}
 
 #main{
   min-height: 100vh;
