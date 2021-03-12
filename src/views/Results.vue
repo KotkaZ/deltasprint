@@ -10,7 +10,7 @@
 
       <template #content>
         <DataTable :value="getFormatedResults" removableSort class="p-datatable-sm p-datatable-striped" ref="dt" :autoLayout="true"
-        v-model:filters="filters">
+        v-model:filters="filters" :scrollable="true">
           
           <template #header>
             <div class="p-d-flex p-jc-end">
