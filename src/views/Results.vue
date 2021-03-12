@@ -2,6 +2,9 @@
   <div class="p-d-flex p-jc-center">
     <Card class="p-col-12 p-md-8 p-shadow-12">
       <template #title>
+        <div class="p-d-flex p-jc-end">
+          <Button id="goback" icon="pi pi-times" class="p-button-outlined" @click="$router.push('/')"/>
+        </div>
         Võistluste tulemused
       </template>
 
@@ -118,5 +121,7 @@ export default {
 </script>
 
 <style scoped>
-
+#goback{
+  color: #1B1B1F;
+}
 </style>
