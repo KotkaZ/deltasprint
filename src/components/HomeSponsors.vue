@@ -37,8 +37,7 @@ h1, p{
     color: white;
 }
 h1 {
-    -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: black;
+    text-shadow: 2px 2px #1B1B1F80;
 }
 
 
