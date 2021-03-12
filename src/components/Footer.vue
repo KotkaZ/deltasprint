@@ -9,7 +9,7 @@
         </div>
         <img class="p-col-12 p-lg-1 p-md-2" src="../assets/mits-ringlogo-valge.svg" alt="Mitsi logo valge">
         <div class="p-col-12 p-lg-4 p-md-6">
-            <h3>MATEMAATIKA-INFORMAATIKA TUDENGISELTS MTÜ</h3><br><br>
+            <h3>MTÜ MATEMAATIKA-INFORMAATIKA TUDENGISELTS</h3><br><br>
             <i class="pi pi-facebook"><a href="https://www.facebook.com/MITS.ATI" target="_blank">MAT-INF tudengiselts</a></i><br>
             <i class="pi pi-image"><a href="https://www.instagram.com/ut_mits/" target="_blank">@ut_mits</a></i><br>
             <i class="pi pi-globe"><a href="https://mits.ee/" target="_blank">mits.ee</a></i><br>
