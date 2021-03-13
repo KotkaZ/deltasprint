@@ -51,6 +51,8 @@ export default {
     padding: 0;
     color: white;
     box-sizing: border-box;
+}
+p {
     font-family: 'Rubik';
 }
 nav{
