@@ -71,12 +71,22 @@ export default {
     getFormatedResults: function(){
       const results = this.getResults;
       if(!results.length || !this.selectedCompetition) return null;
-      results.sort((a,b) => new Date(a.endtime) - new Date(b.endtime));
+
+      results.sort((a,b) => {
+        if(a.endtime && b.endtime) return new Date(a.endtime) - new Date(b.endtime);
+        if(a.endtime) return -1;
+        return 1;
+      });
+
       let place = 1;
+
       results.forEach((el) => {
         el.place = place++;
-        const diff =  new Date(el.endtime) - new Date(this.selectedCompetition.startdate);
-        el.finalTime = humanizeDuration(diff, { language: "et" });
+        if(el.endtime){
+          const diff =  new Date(el.endtime) - new Date(this.selectedCompetition.startdate);
+          el.finalTime = humanizeDuration(diff, { language: "et" });
+        }
+        else el.finalTime = "DNF"
       });
 
       return results;
