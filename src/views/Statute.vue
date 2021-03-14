@@ -25,7 +25,7 @@
 
           <li>Võistlusel saavad osaleda kõik loodus- ja täppisteaduste valdkonna bakalaureusetudengid.</li>
 
-          <li>Võistlus toimub keskkonnas <a class="pi pi-globe" href="https://beta.deltasprint.ee" target="_blank">DELTASPRINT</a>. Osalejatel on TUNGIVALT soovitav eelnevalt platvormiga tutvuda, osaledes mõnel avalikul katsetusel.</li>
+          <li>Võistlus toimub keskkonnas <a class="pi pi-globe" href="https://deltasprint.ee" target="_blank">DELTASPRINT</a>. Osalejatel on TUNGIVALT soovitav eelnevalt platvormiga tutvuda, osaledes mõnel avalikul katsetusel.</li>
 
           <li>Võistlusel algab ajavõtt kõikide osalejate jaoks samaaegselt. Ülesandeid saab lahendada kuni 6 tundi, mille järel ligipääs suletakse.</li>
 
