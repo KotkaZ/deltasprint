@@ -5,10 +5,7 @@
         
       </template>
       <template #title>
-        <div class="p-d-flex p-jc-between">
-          <div class="p-card-title">DeltaSprint 2021 kevad - STATUUT</div>
-          <Button id="goback" icon="pi pi-times" class="p-button-outlined" @click="$router.push('/')"/>
-        </div>
+        <CardTitle title="DeltaSprint 2021 kevad - STATUUT"/>
       </template>
 
       <template #content>
@@ -86,12 +83,12 @@
 
 <script>
 import Card from 'primevue/card/sfc';
-import Button from 'primevue/button';
+import CardTitle from '../components/CardTitle'
 export default {
   name: "Statute",
   components: {
     Card,
-    Button
+    CardTitle
   }
 }
 </script>
@@ -122,7 +119,4 @@ a{
   text-decoration: none;
 }
 
-#goback{
-  color: #1B1B1F;
-}
 </style>

@@ -2,7 +2,7 @@
     <div class="p-d-flex p-jc-center">
         <Card class="p-col-12 p-md-8 p-shadow-12">
             <template #title>
-                Tagasisidevorm
+                <CardTitle title="Tagasisidevorm"/>
             </template>
             <template #content>
                 <Accordion :activeIndex="0" :multiple="true">
@@ -135,6 +135,7 @@ import Textarea from 'primevue/textarea';
 import Divider from 'primevue/divider';
 import Button from 'primevue/button';
 import Card from 'primevue/card';
+import CardTitle from '../components/CardTitle';
 
 export default {
     name: "Feedback",
@@ -146,6 +147,7 @@ export default {
         Rating,
         Textarea,
         Divider,
+        CardTitle,
         Card
     },
     data(){

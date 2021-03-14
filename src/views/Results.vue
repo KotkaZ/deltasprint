@@ -2,10 +2,7 @@
   <div class="p-d-flex p-jc-center">
     <Card class="p-col-12 p-md-8 p-shadow-12">
       <template #title>
-        <div class="p-d-flex p-jc-between">
-          <div class="p-card-title">Võistluste tulemused</div>
-          <Button id="goback" icon="pi pi-times" class="p-button-outlined" @click="$router.push('/')"/>
-        </div>
+        <CardTitle title="Võistluste tulemused"/>
       </template>
 
       <template #content>
@@ -46,9 +43,10 @@ import { mapActions, mapGetters } from 'vuex';
 import DataTable from 'primevue/datatable/sfc';
 import Dropdown from 'primevue/dropdown/sfc';
 import Column from 'primevue/column/sfc';
-import Button from 'primevue/button/sfc';
+import CardTitle from '../components/CardTitle';
 import InputText from 'primevue/inputtext/sfc';
 import Card from 'primevue/card/sfc';
+import Button from 'primevue/button/sfc';
 import {FilterMatchMode} from 'primevue/api';
 
 export default {
@@ -58,8 +56,9 @@ export default {
     Dropdown,
     Card,
     Column,
+    InputText,
     Button,
-    InputText
+    CardTitle
   },
   data(){
     return { 

@@ -1,6 +1,8 @@
 <template>
 	<Card class="card">
-		<template #title>Võistleja info</template>
+		<template #title>
+			<CardTitle title="Võistleja info"/>
+		</template>
 
 		<template #content>
 			<div id="form" class="p-fluid p-grid">
@@ -101,6 +103,8 @@ import Card from 'primevue/card/sfc';
 import InputText from 'primevue/inputtext/sfc';
 import InputMask from 'primevue/inputmask/sfc';
 import Button from 'primevue/button/sfc';
+import CardTitle from './CardTitle';
+
 
 export default {
 	name: "LoginWindow",
@@ -109,6 +113,7 @@ export default {
 		InputText,
 		InputMask,
 		Button,
+		CardTitle,
 		Card
 	},
     data: function() {
