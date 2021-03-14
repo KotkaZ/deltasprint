@@ -2,7 +2,7 @@ import axios from "axios";
 import store from "../store/index";
 
 let config = {
-    baseURL: "https://beta.deltasprint.ee/api",
+    baseURL: "https://deltasprint.ee/api",
     timeout: 60 * 1000, // Timeout
     //withCredentials: true, // Check cross-site Access-Control
 };
