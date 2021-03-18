@@ -10,7 +10,7 @@
         <ol>
           <li>
             Võistluse eesmärk on tuua kokku tudengid, kes on kiired, konkreetsed
-            ja osavad matemaatika ning infromaatika ülesannete lahendamisel.
+            ja osavad matemaatika ning informaatika ülesannete lahendamisel.
           </li>
 
           <li>
@@ -136,7 +136,7 @@
 
           <li>
             Kõikide võitjatega võetakse ühendust e-kirja teel. Isikuandmete
-            õiguse eest vastutab võistleja ise, hilisemad muudatused ei ole
+            õigsuse eest vastutab võistleja ise, hilisemad muudatused ei ole
             aktsepteeritud.
           </li>
 
