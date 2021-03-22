@@ -1,7 +1,7 @@
 <template>
   <Card>
     <template #title>
-      <CardTitle title="Võistleja info" />
+      <CardTitle title="Võistleja info" :reloadFunction="reloadCompetitions" />
     </template>
 
     <template #content>
@@ -182,7 +182,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["signinParticipant", "removeHeaders"]),
+    ...mapActions(["signinParticipant", "removeHeaders", "fetchCompetitions"]),
     toast: function(error) {
       this.$toast.add({
         severity: "error",
@@ -263,6 +263,14 @@ export default {
         console.error(error);
         this.toast(error.message);
         this.removeHeaders();
+      }
+    },
+    reloadCompetitions: async function() {
+      try {
+        await this.fetchCompetitions();
+      } catch (error) {
+        console.error(error);
+        this.toast(error);
       }
     },
   },
