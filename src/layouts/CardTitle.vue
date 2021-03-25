@@ -7,7 +7,7 @@
         id="button"
         icon="pi pi-spinner"
         class="p-button-outlined p-mr-2"
-        @click="reloadFunction"
+        @click="$emit('reload')"
       />
       <Button
         id="button"
@@ -27,7 +27,16 @@ export default {
   components: {
     Button,
   },
-  props: ["title", "reloadFunction"],
+  props: {
+    title: {
+      type: String,
+      required: true,
+    },
+    reloadFunction: {
+      type: Boolean,
+      default: false,
+    },
+  },
 };
 </script>
 
