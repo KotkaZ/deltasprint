@@ -1,71 +1,106 @@
 <template>
   <Card>
     <template #title>Areng</template>
-    <template #content class="p-fluid"> 
-      <p class="number" v-for="nr in numberOfTasks" v-badge="bestProgress[nr-1] ? (bestProgress[nr-1].total > 99 ? '99+' : bestProgress[nr-1].total) : null"
-      :key="nr" :class="{ my: myProgress == nr}">{{nr}}</p>      
+    <template #content class="p-fluid">
+      <p
+        class="number"
+        v-for="nr in numberOfTasks"
+        v-badge="
+          bestProgress[nr - 1]
+            ? bestProgress[nr - 1].total > 99
+              ? '99+'
+              : bestProgress[nr - 1].total
+            : null
+        "
+        :key="nr"
+        :class="{ my: myProgress == nr }"
+      >
+        {{ nr }}
+      </p>
     </template>
     <template #footer>
-      <Button id="giveup" @click="confirmation()" class="p-button-danger" icon="pi pi-ban" label="Annan alla!"/>
+      <Button
+        id="giveup"
+        @click="confirmation()"
+        class="p-button-danger"
+        icon="pi pi-ban"
+        label="Annan alla!"
+      />
     </template>
   </Card>
 </template>
 
 <script>
-import { mapActions } from 'vuex';
-import Card from 'primevue/card/sfc';
-import Button from 'primevue/button';
+import { mapActions } from "vuex";
+import Card from "primevue/card/sfc";
+import Button from "primevue/button";
 export default {
-    name: "ProgressBar",
-    components: {
-      Button,
-      Card
+  name: "ProgressBar",
+  components: {
+    Button,
+    Card,
+  },
+  methods: {
+    ...mapActions(["removeHeaders"]),
+    confirmation: function() {
+      this.$confirm.require({
+        message: "Kinnitate, et soovite võistlusel alla vanduda?",
+        header: "Kinnitus",
+        icon: "pi pi-exclamation-triangle",
+        accept: () => {
+          this.removeHeaders();
+          this.$router.push({
+            name: "Feedback",
+            params: { id: this.competition },
+          });
+        },
+        reject: () => {},
+      });
     },
-    methods: {
-      ...mapActions(['removeHeaders']),
-      confirmation: function() {
-        this.$confirm.require({
-          message: 'Kinnitate, et soovite võistlusel alla vanduda?',
-          header: 'Kinnitus',
-          icon: 'pi pi-exclamation-triangle',
-          accept: () => {
-            this.removeHeaders();
-            this.$router.push('/')
-          },
-          reject: () => {}
-        });
-      }
+  },
+  props: {
+    numberOfTasks: {
+      type: Number,
     },
-    props: ['numberOfTasks','myProgress','bestProgress'],
-}
+    myProgress: {
+      type: Number,
+    },
+    bestProgress: {
+      type: Array,
+    },
+    competition: {
+      type: Number,
+    },
+  },
+};
 </script>
 
 <style scoped>
 .number {
-	background: #151515;
-	color: #fff;
-	height: 30px;
-	width: 30px;
-	display: inline-block;
-	font-size: 0.8em;
-	margin-right: 4px;
-	line-height: 30px;
-	text-align: center;
-	text-shadow: 0 1px 0 rgba(255,255,255,0.2);
-	border-radius: 15px 15px 15px 0px;
+  background: #151515;
+  color: #fff;
+  height: 30px;
+  width: 30px;
+  display: inline-block;
+  font-size: 0.8em;
+  margin-right: 4px;
+  line-height: 30px;
+  text-align: center;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.2);
+  border-radius: 15px 15px 15px 0px;
 }
 
-p{
+p {
   font-weight: bold;
   margin: 5px;
 }
 
-p.my{
-	background: #B5002F;
+p.my {
+  background: #b5002f;
   color: #fff;
 }
 
-#giveup{
+#giveup {
   width: 100%;
 }
 </style>
