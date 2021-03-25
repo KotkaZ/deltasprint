@@ -1,11 +1,11 @@
 <template>
   <Card>
     <template #title>
-      <CardTitle title="Võistleja info" :reloadFunction="reloadCompetitions" />
+      <CardTitle title="Võistleja info" />
     </template>
 
     <template #content>
-      <div id="form" class="p-fluid p-grid">
+      <div class="p-fluid p-grid">
         <div class="p-field p-col-12 p-md-6">
           <div class="p-inputgroup">
             <span class="p-inputgroup-addon">
@@ -51,7 +51,7 @@
             </span>
             <span class="p-float-label">
               <InputMask
-                mask="a99999"
+                mask="a9999?999"
                 v-model="participant.studentcode"
                 :class="{ 'p-invalid': validationErrors.studentcode }"
               />
@@ -82,7 +82,7 @@
           }}</small>
         </div>
 
-        <div class="p-field p-col-12 p-md-6">
+        <div class="p-field p-col-12">
           <div class="p-inputgroup">
             <span class="p-inputgroup-addon">
               <i class="pi pi-briefcase"></i>
@@ -100,47 +100,25 @@
             validationErrors.studyfield
           }}</small>
         </div>
-
-        <div class="p-field p-col-12 p-md-6">
-          <div class="p-inputgroup">
-            <span class="p-inputgroup-addon">
-              <i class="pi pi-globe"></i>
-            </span>
-            <span class="p-float-label">
-              <Dropdown
-                v-model="participant.competition"
-                optionValue="id"
-                :options="competitions"
-                optionLabel="name"
-                :class="{ 'p-invalid': validationErrors.competition }"
-              />
-              <label>Vali üritus</label>
-            </span>
-          </div>
-          <small v-show="validationErrors.competition" class="p-error">{{
-            validationErrors.competition
-          }}</small>
-        </div>
       </div>
     </template>
 
     <template #footer>
-      <div class="p-d-flex p-jc-end">
-        <Button @click="confirmation()" icon="pi pi-check" label="Kinnita" />
+      <div class="p-fluid">
+        <Button @click="submitData()" icon="pi pi-arrow-right" label="Edasi" />
       </div>
     </template>
   </Card>
 </template>
 
 <script>
-import { mapActions } from "vuex";
 import joi from "joi";
 import Dropdown from "primevue/dropdown/sfc";
 import Card from "primevue/card/sfc";
 import InputText from "primevue/inputtext/sfc";
 import InputMask from "primevue/inputmask/sfc";
 import Button from "primevue/button/sfc";
-import CardTitle from "./CardTitle";
+import CardTitle from "@/layouts/CardTitle";
 
 export default {
   name: "LoginWindow",
@@ -154,6 +132,13 @@ export default {
   },
   data: function() {
     return {
+      participant: {
+        firstname: undefined,
+        lastname: undefined,
+        studentcode: undefined,
+        email: undefined,
+        studyfield: undefined,
+      },
       studyfields: [
         "Informaatika",
         "Matemaatika",
@@ -161,14 +146,6 @@ export default {
         "Matemaatiline statistika",
         "Muu",
       ],
-      participant: {
-        firstname: undefined,
-        lastname: undefined,
-        studentcode: undefined,
-        email: undefined,
-        studyfield: undefined,
-        competition: undefined,
-      },
       validationErrors: {},
       errorMessages: {
         "string.empty": `Väli on kohustuslik!`,
@@ -182,7 +159,6 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["signinParticipant", "removeHeaders", "fetchCompetitions"]),
     toast: function(error) {
       this.$toast.add({
         severity: "error",
@@ -214,7 +190,8 @@ export default {
         studentcode: joi
           .string()
           .alphanum()
-          .length(6)
+          .min(5)
+          .max(8)
           .label("Matrikli number")
           .messages(this.errorMessages),
         email: joi
@@ -228,24 +205,9 @@ export default {
           .required()
           .label("Eriala")
           .messages(this.errorMessages),
-        competition: joi
-          .any()
-          .required()
-          .label("Võistlus")
-          .messages(this.errorMessages),
       });
 
       return schema.validate(this.participant, { abortEarly: false });
-    },
-    confirmation: function() {
-      this.$confirm.require({
-        message:
-          "Kinnitate, et teie andmed on õiged ja olete põhjalikult tutvunud ürituse statuudiga?",
-        header: "Kinnitus",
-        icon: "pi pi-exclamation-triangle",
-        accept: () => this.submitData(),
-        reject: () => {},
-      });
     },
     submitData: async function() {
       try {
@@ -255,26 +217,17 @@ export default {
           validationResult.error.details.forEach(
             err => (this.validationErrors[err.context.key] = err.message)
           );
+
           throw new Error("Vigane valideering!");
         }
-        await this.signinParticipant(this.participant);
-        this.$router.push("/competition");
+
+        this.$emit("validated", this.participant);
       } catch (error) {
         console.error(error);
         this.toast(error.message);
-        this.removeHeaders();
-      }
-    },
-    reloadCompetitions: async function() {
-      try {
-        await this.fetchCompetitions();
-      } catch (error) {
-        console.error(error);
-        this.toast(error);
       }
     },
   },
-  props: ["competitions"],
 };
 </script>
 
