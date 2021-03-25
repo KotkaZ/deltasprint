@@ -17,7 +17,7 @@
             Võistlus kuulutatakse välja
             <a
               class="pi pi-facebook"
-              href="https://www.facebook.com/MITS.ATI"
+              href="https://www.facebook.com/UT.MITS"
               target="_blank"
             >
               MTÜ MATEMAATIKA-INFORMAATIKA TUDENGISELTS</a
@@ -175,7 +175,7 @@
 
 <script>
 import Card from "primevue/card/sfc";
-import CardTitle from "../components/CardTitle";
+import CardTitle from "@/layouts/CardTitle";
 export default {
   name: "Statute",
   components: {
