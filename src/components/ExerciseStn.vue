@@ -106,7 +106,7 @@ export default {
     ...mapGetters(["getUploadPercentage"]),
   },
   methods: {
-    ...mapActions(["submitResult", "fetchQuestion", "removeHeaders"]),
+    ...mapActions(["submitSolution", "fetchQuestion", "removeHeaders"]),
     ...mapMutations(["setUploadPercentage"]),
     toast: function(message) {
       this.$toast.add({
@@ -129,7 +129,7 @@ export default {
 
         try {
           this.blockedPanel = true;
-          await this.submitResult(formData);
+          await this.submitSolution(formData);
           this.$toast.add({
             severity: "success",
             summary: "Teade",

@@ -1,6 +1,6 @@
 <template>
   <div class="p-grid p-ai-center p-jc-center vertical-container">
-    <img class="p-col-3" :src="competition.img" alt="" />
+    <img class="p-col-3" :src="competition.icon" alt="" />
     <div class="p-col-9 p-fluid">
       <h3>{{ competition.name }}</h3>
       <ul>
@@ -33,7 +33,7 @@ export default {
       return start.toLocaleTimeString("et-EE", options);
     },
     end: function() {
-      const end = new Date(this.competition.enddate);
+      const end = new Date(this.competition.endtime);
       let options = {
         weekday: "long",
         year: "numeric",

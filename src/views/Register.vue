@@ -10,7 +10,7 @@
 
     <CompetitionSelection
       v-else-if="validParticipant"
-      :competitions="getCompetitions"
+      :competitions="getAvailableCompetitions"
       @back="validParticipant = false"
       @reload="reloadCompetitions"
       @start="startEvent"
@@ -37,10 +37,14 @@ export default {
     CompetitionSelection,
   },
   computed: {
-    ...mapGetters(["getCompetitions"]),
+    ...mapGetters(["getAvailableCompetitions"]),
   },
   methods: {
-    ...mapActions(["fetchCompetitions", "removeHeaders", "signinParticipant"]),
+    ...mapActions([
+      "fetchAvailableCompetitions",
+      "removeHeaders",
+      "signinParticipant",
+    ]),
     toast: function(error) {
       this.$toast.add({
         severity: "error",
@@ -51,7 +55,7 @@ export default {
     },
     reloadCompetitions: async function() {
       try {
-        await this.fetchCompetitions();
+        await this.fetchAvailableCompetitions();
       } catch (error) {
         console.error(error);
         this.toast(error);
@@ -76,7 +80,7 @@ export default {
   },
   created: async function() {
     try {
-      await this.fetchCompetitions();
+      await this.fetchAvailableCompetitions();
     } catch (error) {
       console.error(error);
       this.toast(error);
