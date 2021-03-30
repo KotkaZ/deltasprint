@@ -29,6 +29,7 @@ export default {
         day: "numeric",
         hour: "2-digit",
         minute: "2-digit",
+        timeZone: "GMT",
       };
       return start.toLocaleTimeString("et-EE", options);
     },
@@ -41,6 +42,7 @@ export default {
         day: "numeric",
         hour: "2-digit",
         minute: "2-digit",
+        timeZone: "GMT",
       };
       return end.toLocaleTimeString("et-EE", options);
     },
